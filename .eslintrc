@@ -1,0 +1,25 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "env": {
+    "es6": true
+  },
+  "plugins": [
+    "react",
+    "react-hooks"
+  ],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "import/no-unresolved": 0,
+    "no-console": 0,
+    "react/jsx-props-no-spreading": 0
+  },
+  "globals": {
+    "document": true,
+    "window": true
+  }
+}
