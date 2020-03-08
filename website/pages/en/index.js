@@ -1,10 +1,4 @@
-/**
- * Copyright (c) 2017-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
+/* eslint-disable */
 const React = require('react');
 
 const CompLibrary = require('../../core/CompLibrary.js');
@@ -23,7 +17,7 @@ class HomeSplash extends React.Component {
 
     const SplashContainer = props => (
       <div className="homeContainer">
-        <div className="homeSplashFade">
+        <div className="homeSplashFade homeSplashBackground">
           <div className="wrapper homeWrapper">{props.children}</div>
         </div>
       </div>
@@ -37,13 +31,13 @@ class HomeSplash extends React.Component {
 
     const ProjectTitle = props => (
       <h2 className="projectTitle">
-        {props.title}
+        Create beautiful immersive transitions
         <small>{props.tagline}</small>
       </h2>
     );
 
     const PromoSection = props => (
-      <div className="section promoSection">
+      <div className="section promoSection items-start p-10">
         <div className="promoRow">
           <div className="pluginRowBlock">{props.children}</div>
         </div>
@@ -62,7 +56,20 @@ class HomeSplash extends React.Component {
       <SplashContainer>
         <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
         <div className="inner">
-          <ProjectTitle tagline={siteConfig.tagline} title={siteConfig.title} />
+          <div className="flex w-full p-10">
+            <div className="w-1/2 flex items-start flex-col">
+              <div className="flex">
+                <div className="text-white font-bold text-xl leading-tight text-gray-900 text-pink-600">Motion</div>
+                <div className="text-white font-light text-xl leading-tight text-gray-900 text-pink-600">Layout</div>
+              </div>
+              <div className="text-white font-normal text-left text-4xl leading-tight text-gray-700">
+                Create immersive animations using shared components.
+              </div>
+            </div>
+            <div className="w-1/2">
+
+            </div>
+          </div>
           <PromoSection>
             <Button href="#try">Try It Out</Button>
             <Button href={docUrl('doc1.html')}>Example Link</Button>
