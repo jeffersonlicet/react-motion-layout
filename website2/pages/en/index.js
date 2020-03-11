@@ -1,11 +1,34 @@
 /* eslint-disable */
 const React = require('react');
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 const CompLibrary = require('../../core/CompLibrary.js');
 
 const MarkdownBlock = CompLibrary.MarkdownBlock; /* Used to read markdown */
 const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
+
+class Demo extends React.Component {
+  componentDidMount() {
+    console.log(window);
+    alert('hola');
+  }
+
+
+  render() {
+    return (
+      <ul className="bg-white w-1/2">
+        <li className="flex p-4">
+          <img
+            src="https://images.unsplash.com/photo-1524148327109-98933ca00d2e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&h=300&q=60"
+            className="h-14 w-14 md:h-24 md:w-24 rounded-full"
+          />
+          <div className="text-gray-600">Jefferson</div>
+        </li>
+      </ul>
+    );
+  }
+}
 
 class HomeSplash extends React.Component {
   render() {
@@ -45,8 +68,8 @@ class HomeSplash extends React.Component {
     );
 
     const Button = props => (
-      <div className="pluginWrapper buttonWrapper">
-        <a className="button" href={props.href} target={props.target}>
+      <div className="pluginWrapper buttonWrapper shadow-md">
+        <a className="customButton rounded px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3 bg-pink-500 hover:bg-pink-600 hover:test-white md:text-lg xl:text-base text-white font-semibold leading-tight shadow-md" href={props.href} target={props.target}>
           {props.children}
         </a>
       </div>
@@ -54,26 +77,24 @@ class HomeSplash extends React.Component {
 
     return (
       <SplashContainer>
-        <Logo img_src={`${baseUrl}img/undraw_monitor.svg`} />
         <div className="inner">
-          <div className="flex w-full p-10">
+          <div className="flex w-full p-10 mt-4">
             <div className="w-1/2 flex items-start flex-col">
               <div className="flex">
-                <div className="text-white font-bold text-xl leading-tight text-gray-900 text-pink-600">Motion</div>
-                <div className="text-white font-light text-xl leading-tight text-gray-900 text-pink-600">Layout</div>
+                <div className="text-white font-bold text-2xl leading-tight text-pink-500">Motion</div>
+                <div className="text-white font-light text-2xl leading-tight text-pink-500">Layout</div>
               </div>
-              <div className="text-white font-normal text-left text-4xl leading-tight text-gray-700">
+              <div className="text-white font-normal text-left text-4xl leading-tight text-gray-700 mt-2">
                 Create immersive animations using shared components.
               </div>
             </div>
             <div className="w-1/2">
-
+              <Demo />
             </div>
           </div>
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html')}>Example Link</Button>
-            <Button href={docUrl('doc2.html')}>Example Link 2</Button>
+            <Button href="#try">Get Started</Button>
+            <Button href={docUrl('doc2.html')}>Github</Button>
           </PromoSection>
         </div>
       </SplashContainer>

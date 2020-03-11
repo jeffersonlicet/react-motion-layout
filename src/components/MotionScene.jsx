@@ -116,7 +116,8 @@ class InternalMotionScene extends React.Component {
     const targetsKeys = Object.keys(targets);
 
     if (sourceKeys.length !== targetsKeys.length) {
-      return null;
+      console.log('Missing target elements');
+      //return null;
     }
 
     return ReactDOM.createPortal(sourceKeys.map((key) => {
@@ -141,6 +142,7 @@ class InternalMotionScene extends React.Component {
 
       const points = this.getPoints(rect, targetRect);
       const style = {
+        marginTop: '0px !important',
         position: 'absolute',
         x: points.source.x,
         y: points.source.y,
@@ -197,7 +199,7 @@ class InternalMotionScene extends React.Component {
       const finalProps = {
         ...props,
         key,
-        style: { ...props.style, ...source.component.props.style },
+        style: { ...source.component.props.style, ...props.style },
       };
 
       return React.cloneElement(source.component, finalProps);

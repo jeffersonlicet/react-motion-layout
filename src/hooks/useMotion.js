@@ -7,9 +7,9 @@ import { GlobalContext } from '../components/MotionProvider';
 */
 export default function useMotion(viewName) {
   const { dispatch, store } = useContext(GlobalContext);
-
-  return {
-    withTransition: useCallback((callback) => () => {
+  console.log(store);
+  function withTransition(callback) {
+    return () => {
       const { sources } = store.views[viewName];
 
       dispatch({
@@ -30,6 +30,7 @@ export default function useMotion(viewName) {
       if (callback) {
         callback();
       }
-    }, [dispatch, store, viewName]),
-  };
+    };
+  }
+  return [withTransition];
 }
