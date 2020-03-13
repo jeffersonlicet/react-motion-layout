@@ -143,6 +143,9 @@ class InternalMotionScene extends React.Component {
       const points = this.getPoints(rect, targetRect);
       const style = {
         marginTop: '0px !important',
+        marginLeft: '0px !important',
+        marginBottom: '0px !important',
+        marginRight: '0px !important',
         position: 'absolute',
         x: points.source.x,
         y: points.source.y,

@@ -7,13 +7,13 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: rgb(33, 175, 144);
-  --ifm-color-primary-darker: rgb(31, 165, 136);
-  --ifm-color-primary-darkest: rgb(26, 136, 112);
-  --ifm-color-primary-light: rgb(70, 203, 174);
-  --ifm-color-primary-lighter: rgb(102, 212, 189);
-  --ifm-color-primary-lightest: rgb(146, 224, 208);
+  --ifm-color-primary: #ea4c89;
+  --ifm-color-primary-dark: #e73077;
+  --ifm-color-primary-darker: #e5226e;
+  --ifm-color-primary-darkest: #c21759;
+  --ifm-color-primary-light: #ed689b;
+  --ifm-color-primary-lighter: #ef76a4;
+  --ifm-color-primary-lightest: #f49fc0;
   --ifm-code-font-size: 95%;
 }
 
@@ -22,4 +22,16 @@
   display: block;
   margin: 0 calc(-1 * var(--ifm-pre-padding));
   padding: 0 var(--ifm-pre-padding);
+}
+
+.baloo {
+  font-family: 'Baloo Chettan 2'
+}
+
+.primary {
+  color: #ea4c89;
+}
+
+.button_pink:hover {
+  text-decoration: none;
 }

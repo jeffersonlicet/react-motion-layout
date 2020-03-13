@@ -71,27 +71,33 @@ function Home() {
       description="Description will go into a meta tag in <head />"
     >
       <MotionProvider debug>
-      <header className={classnames('hero hero--primary', styles.heroBanner)}>
-        <div className="flex w-full">
-          <div className="w-2/3" />
-          <div className="w-1/3">
-            <HomeDemo />
-          </div>
-        </div>
-      </header>
-      <main>
-        {features && features.length && (
-          <section className={styles.features}>
-            <div className="container">
-              <div className="row">
-                {features.map((props, idx) => (
-                  <Feature key={idx} {...props} />
-                ))}
+        <header className="bg-gray-200 pt-10 pb-20">
+          <div className="flex w-full justify-between flex-col lg:flex-row">
+            <div className="w-full lg:w-1/2 xl:ml-16 ml-0 mt-32">
+              <div className="text-5xl baloo font-bold primary leading-tight">React Motion Layout</div>
+              <div className="text-2xl text-gray-500 leading-tight">Create beautiful immersive animations using shared components.</div>
+              <div className="mt-8">
+                <a href="/docs/installation" className="hover:text-white button_pink rounded-lg px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3 bg-pink-500 hover:bg-pink-600 md:text-lg xl:text-base text-white font-semibold leading-tight shadow-md">Get Started</a>
               </div>
             </div>
-          </section>
-        )}
-      </main>
+            <div className="w-full lg:w-auto mt-8 px-10">
+              <HomeDemo />
+            </div>
+          </div>
+        </header>
+        <main>
+          {features && features.length && (
+            <section className={styles.features}>
+              <div className="container">
+                <div className="row">
+                  {features.map((props, idx) => (
+                    <Feature key={idx} {...props} />
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+        </main>
       </MotionProvider>
     </Layout>
   );

@@ -7,6 +7,7 @@ module.exports = {
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
   themeConfig: {
+    disableDarkMode: true,
     navbar: {
       title: 'My Site',
       logo: {
@@ -95,5 +96,6 @@ module.exports = {
   ],
   stylesheets: [
     'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css',
+    'https://fonts.googleapis.com/css?family=Baloo+Chettan+2:400,700&display=swap',
   ],
 };
