@@ -1,4 +1,4 @@
-import { useContext, useCallback } from 'react';
+import { useContext } from 'react';
 import actions from '../state/actions';
 import { GlobalContext } from '../components/MotionProvider';
 
@@ -7,7 +7,6 @@ import { GlobalContext } from '../components/MotionProvider';
 */
 export default function useMotion(viewName) {
   const { dispatch, store } = useContext(GlobalContext);
-  console.log(store);
   function withTransition(callback) {
     return () => {
       const { sources } = store.views[viewName];
@@ -32,5 +31,5 @@ export default function useMotion(viewName) {
       }
     };
   }
-  return [withTransition];
+  return withTransition;
 }

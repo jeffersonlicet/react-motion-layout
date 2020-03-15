@@ -7,13 +7,13 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #ea4c89;
-  --ifm-color-primary-dark: #e73077;
-  --ifm-color-primary-darker: #e5226e;
-  --ifm-color-primary-darkest: #c21759;
-  --ifm-color-primary-light: #ed689b;
-  --ifm-color-primary-lighter: #ef76a4;
-  --ifm-color-primary-lightest: #f49fc0;
+  --ifm-color-primary: #d53f8c;
+  --ifm-color-primary-dark: #cc2d7e;
+  --ifm-color-primary-darker: #c02a77;
+  --ifm-color-primary-darkest: #9f2362;
+  --ifm-color-primary-light: #da569a;
+  --ifm-color-primary-lighter: #dc61a0;
+  --ifm-color-primary-lightest: #e483b5;
   --ifm-code-font-size: 95%;
 }
 
@@ -29,9 +29,86 @@
 }
 
 .primary {
-  color: #ea4c89;
+  color: #ed64a6;
 }
 
 .button_pink:hover {
   text-decoration: none;
+}
+
+.demo-height {
+  height: 450px;
+}
+
+.navbar__title {
+  font-family: 'Baloo Chettan 2';
+  font-size: 24px;
+  color: #ed64a6;
+}
+
+.mouse {
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  bottom: 40px;
+}
+
+.mouse-icon {
+   width: 25px;
+   height: 45px;
+   border: 2px solid #a0aec0;
+   border-radius: 15px;
+   cursor: pointer;
+   position: relative;
+   text-align: center;
+}
+
+.mouse-wheel {
+  height: 6px;
+  margin: 2px auto 0;
+  display: block;
+  width: 3px;
+  background-color: #a0aec0;
+  border-radius: 50%;
+  -webkit-animation: 1.6s ease infinite wheel-up-down;
+ -moz-animation: 1.6s ease infinite wheel-up-down;
+  animation: 1.6s ease infinite wheel-up-down;
+}
+
+@-webkit-keyframes wheel-up-down {
+	0% {
+	    margin-top: 2px;
+	    opacity: 0;
+	}
+	30% {
+	    opacity: 1;
+	}
+	100% {
+	    margin-top: 20px;
+	    opacity: 0;
+	}
+}@-moz-keyframes wheel-up-down {
+	0% {
+	    margin-top: 2px;
+	    opacity: 0;
+	}
+	30% {
+	    opacity: 1;
+	}
+	100% {
+	    margin-top: 20px;
+	    opacity: 0;
+	}
+}@keyframes wheel-up-down {
+	0% {
+	    margin-top: 2px;
+	    opacity: 0;
+	}
+	30% {
+	    opacity: 1;
+	}
+	100% {
+	    margin-top: 20px;
+	    opacity: 0;
+	}
 }

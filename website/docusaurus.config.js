@@ -1,29 +1,37 @@
 module.exports = {
-  title: 'My Site',
-  tagline: 'The tagline of my site',
-  url: 'https://your-docusaurus-test-site.com',
+  title: 'React Motion Layout',
+  tagline: 'Animate components',
+  url: 'http://jeffersonlicet.com/reacto-motion-layout',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'jeffersonlicet', // Usually your GitHub org/user name.
+  projectName: 'React Motion Layout', // Usually your repo name.
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/dracula'),
+    },
     disableDarkMode: true,
     navbar: {
-      title: 'My Site',
+      title: 'Motion Layout',
       logo: {
         alt: 'My Site Logo',
-        src: 'img/logo.svg',
+        src: 'img/logo.png',
       },
       links: [
         {
-          to: 'docs/doc1',
+          to: 'docs/installation',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          to: 'examples/feed',
+          activeBasePath: 'examples/feed',
+          label: 'Examples',
+          position: 'left',
+        },
+        {
+          href: 'https://github.com/jeffersonlicet/react-motion-layout',
           label: 'GitHub',
           position: 'right',
         },
@@ -36,12 +44,12 @@ module.exports = {
           title: 'Docs',
           items: [
             {
-              label: 'Style Guide',
-              to: 'docs/doc1',
+              label: 'Installation',
+              to: 'docs/installation',
             },
             {
-              label: 'Second Doc',
-              to: 'docs/doc2',
+              label: 'Animating components',
+              to: 'docs/animating',
             },
           ],
         },
@@ -49,12 +57,12 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+              label: 'Credits',
+              href: 'credits/libs',
             },
             {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
+              label: 'Stack Overflow',
+              href: 'https://stackoverflow.com/questions/tagged/react-motion-layout',
             },
           ],
         },
@@ -62,21 +70,17 @@ module.exports = {
           title: 'Social',
           items: [
             {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/jeffersonlicet/react-motion-layout',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/docusaurus',
+              href: 'https://twitter.com/jeffersonlicet',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Jefferson Licet. Built with Docusaurus.`,
     },
   },
   presets: [

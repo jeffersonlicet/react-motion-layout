@@ -11,10 +11,12 @@
   "dependencies": {
     "@docusaurus/core": "^2.0.0-alpha.48",
     "@docusaurus/preset-classic": "^2.0.0-alpha.48",
+    "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.39",
     "classnames": "^2.2.6",
     "framer-motion": "^1.9.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-icons": "^3.9.0",
     "react-motion-layout": "file:.."
   },
   "browserslist": {

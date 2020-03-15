@@ -35,7 +35,7 @@ export default function MotionProvider({ children, debug }) {
   useEffect(() => {
     const [body] = document.getElementsByTagName('body');
     const element = document.createElement('div');
-    element.setAttribute('id', 'rose-portal');
+    element.setAttribute('id', 'react-motion-portal');
     body.appendChild(element);
     setPortal(element);
     log.info('Portal element created');

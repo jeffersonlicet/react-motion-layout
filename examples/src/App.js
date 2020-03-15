@@ -1,16 +1,14 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
-import { MotionProvider }  from 'react-motion-layout';
+import { Switch, Route, BrowserRouter as Router, Link } from 'react-router-dom';
+import { MotionLayoutProvider }  from 'react-motion-layout';
 import Feed from './Feed';
 import Story from './Story';
 import './App.css';
 
-import { RouterLink as Link } from 'react-motion-layout';
-
 export default function App() {
   return (
     <Router>
-      <MotionProvider debug>
+      <MotionLayoutProvider debug>
         <div className="container w-full container bg-container flex">
           <div className="h-full fixed w-2/12 bg-white shadow-right">
             <ul className="p-10">
@@ -36,7 +34,7 @@ export default function App() {
             </Switch>
           </div>
         </div>
-      </MotionProvider>
+      </MotionLayoutProvider>
     </Router>
   );
 }

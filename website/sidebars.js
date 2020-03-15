@@ -1,6 +1,7 @@
 module.exports = {
   someSidebar: {
-    Docusaurus: ['doc1', 'doc2', 'doc3'],
-    Features: ['mdx'],
+    'Getting Started': ['installation', 'animating'],
+    API: ['MotionLayoutProvider', 'MotionScreen', 'MotionScene', 'SharedElementText', 'SharedElementImage', 'RouterLink'],
+    Hooks: ['useMotion'],
   },
 };

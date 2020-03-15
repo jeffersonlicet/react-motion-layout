@@ -24,10 +24,13 @@ class InternalMotionScene extends React.Component {
 
     const type = context.store.views[props.name]
       ? actions.view.updateViewScreen : actions.view.register;
+
+    const { screenName } = props.screenContext || {};
+
     context.dispatch({
       type,
       viewName: name,
-      screenName: props.screenContext.screenName,
+      screenName,
     });
   }
 
@@ -42,6 +45,15 @@ class InternalMotionScene extends React.Component {
         window.scrollTo(0, 0);
       }
 
+      this.setState({
+        scroll: {
+          source: {
+            x: window.scrollX,
+            y: window.scrollY,
+          },
+        },
+      });
+
       this.animationTimeout = setTimeout(this.startAnimation, 0);
     }
   }
@@ -51,23 +63,28 @@ class InternalMotionScene extends React.Component {
   }
 
   startAnimation = () => {
-    this.setState({ animate: true });
+    this.setState({
+      animate: true,
+    });
   }
 
   onAnimationEnd = () => {
     this.setState({ isTargetView: false }, this.resetSources);
   }
 
-  getPoints = ({ x, y }, { x: xDest, y: yDest }) => ({
-    source: {
-      x: x + window.scrollX,
-      y: y + window.scrollY,
-    },
-    dest: {
-      x: xDest + window.scrollX,
-      y: yDest + window.scrollY,
-    },
-  });
+  getPoints = ({ x, y }, { x: xDest, y: yDest }) => {
+    const { scroll } = this.state;
+    return {
+      source: {
+        x: x + scroll.source.x,
+        y: y + scroll.source.y,
+      },
+      dest: {
+        x: xDest + window.scrollX,
+        y: yDest + window.scrollY,
+      },
+    };
+  }
 
   resetSources = () => {
     const { name: viewName } = this.props;
@@ -101,9 +118,11 @@ class InternalMotionScene extends React.Component {
   }
 
   renderComponents() {
-    const { isTargetView, animate, animationQueue } = this.state;
+    const {
+      isTargetView, animate, animationQueue, scroll,
+    } = this.state;
 
-    if (!isTargetView) {
+    if (!isTargetView || !scroll) {
       return null;
     }
 
@@ -117,7 +136,7 @@ class InternalMotionScene extends React.Component {
 
     if (sourceKeys.length !== targetsKeys.length) {
       console.log('Missing target elements');
-      //return null;
+      // return null;
     }
 
     return ReactDOM.createPortal(sourceKeys.map((key) => {
@@ -214,7 +233,10 @@ class InternalMotionScene extends React.Component {
     const { animate, isTargetView } = this.state;
     return (
       <ViewContext.Provider value={{ viewName: name }}>
-        <div style={{ transition: 'opacity 0.5s', opacity: animate || !isTargetView ? '1' : '0' }}>
+        <div
+          onClick={this.props.onClick}
+          style={{ transition: 'opacity 0.5s', opacity: animate || !isTargetView ? '1' : '0' }}
+        >
           {children}
         </div>
         {this.renderComponents()}
