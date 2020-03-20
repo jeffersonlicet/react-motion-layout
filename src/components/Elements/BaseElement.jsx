@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import actions from '../../state/actions';
-import { GlobalContext } from '../MotionProvider';
+import GlobalContext from '../../utils/globalContext';
 import { ViewContext } from '../MotionScene';
 
 export function ContextProvider({ children }) {

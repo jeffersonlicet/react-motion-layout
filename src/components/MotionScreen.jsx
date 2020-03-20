@@ -1,39 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { GlobalContext } from './MotionProvider';
+import GlobalContext from '../utils/globalContext';
 import actions from '../state/actions';
 
+console.log(GlobalContext);
 export const ScreenContext = React.createContext();
 
 export default class MotionScreen extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-
-    const { dispatch } = context;
-    dispatch({ type: actions.view.setScreen, screen: props.name });
-  }
-
-  componentWillUnmount() {
+  componentDidMount() {
+    const { dispatch } = this.context;
     const { name } = this.props;
-    const { store, dispatch } = this.context;
-
-    /*
-    const num = Object.keys(store.views)
-      .reduce((acc, view) => {
-        const { screenName } = store.views[view];
-        acc[screenName] = [...(acc[screenName] || []), view];
-        return acc;
-      }, {});
-
-    console.log(num);
-    if (num[name].length === 1) {
-      console.log('here we should set as active the only one');
-      dispatch({
-        type: actions.view.setExitView,
-        viewName: num[name][0],
-      });
-    }
-    */
+    dispatch({ type: actions.view.setScreen, screen: name });
   }
 
   render() {

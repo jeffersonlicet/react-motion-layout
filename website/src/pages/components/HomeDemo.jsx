@@ -7,7 +7,6 @@ import {
 export default function HomeDemo() {
   const [animated, setAnimated] = useState(false);
   const withTransition = useMotion('story-0');
-
   const setAnimated2 = withTransition(() => setAnimated(!animated));
 
   useEffect(() => {

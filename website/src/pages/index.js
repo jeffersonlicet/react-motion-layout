@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import Layout from '@theme/Layout';
-import { MotionLayoutProvider } from 'react-motion-layout';
+import { MotionLayoutProvider, withAnimation } from 'react-motion-layout';
 
 import { FiCode, FiArchive, FiList } from 'react-icons/fi';
 import Button from './components/Button';
@@ -60,7 +60,7 @@ function Home() {
       description="Create beautiful immersive animations using shared components"
     >
       <MotionLayoutProvider debug>
-        <header className="bg-gray-200 pt-10 h-screen">
+        <header className="bg-gray-200 pt-10 min-h-screen">
           <div className="flex w-full justify-between flex-col lg:flex-row">
             <div className="w-full lg:w-1/2 md:ml-8 xl:ml-16 ml-0 mt-32">
               <div className="text-5xl baloo font-bold primary leading-tight">Motion Layout</div>
@@ -75,7 +75,7 @@ function Home() {
               <HomeDemo />
             </div>
           </div>
-          <div className="mouse">
+          <div className="mouse hidden lg:block">
             <div className="mouse-icon">
               <span className="mouse-wheel" />
             </div>
@@ -97,7 +97,7 @@ function Home() {
           <div className="flex justify-center py-10  flex-col items-center">
             <div className="text-5xl baloo text-white font-bold primary leading-tight">What?</div>
             <div className="mt-10 mb-20">
-              <div className="text-center text-gray-600 text-xl max-w-3xl justify-center flex">
+              <div className="text-center text-gray-600 text-xl max-w-3xl justify-center flex px-4">
                 There are amazing libraries like framer-motion that help you create animations when mounting or unmounting components. But, if two views have the same image in different positions and sizes, they cannot be animated together. With Motion Layout, you can link components together to animate them when changing views.
               </div>
             </div>
@@ -112,4 +112,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default withAnimation(Home);

@@ -6,7 +6,7 @@ import { MotionScene, SharedElement, useMotion } from 'react-motion-layout';
 export default function FeedItem({ avatar, image, id }) {
   const history = useHistory();
   const withTransition = useMotion(`story-${id}`);
-  const callback = useCallback(() => history.push(`/story/${id}`));
+  const callback = useCallback(() => history.push(`/story/${id}`), [history, id]);
   return (
       <MotionScene name={`story-${id}`} onClick={withTransition(callback)}>
         <div className="cursor-pointer rounded shadow-sm bg-white  max-w-sm w-full lg:max-w-full lg:flex mb-4">

@@ -5,7 +5,7 @@ import React, {
 import PropTypes from 'prop-types';
 import { reducer, initialState } from '../state/reducer';
 
-export const GlobalContext = React.createContext();
+import GlobalContext from '../utils/globalContext';
 
 export default function MotionProvider({ children, debug }) {
   const [store, internalDispatch] = useReducer(reducer, initialState);

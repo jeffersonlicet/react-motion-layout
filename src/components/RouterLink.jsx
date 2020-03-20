@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { Link, withRouter } from 'react-router-dom';
 
-import { GlobalContext } from './MotionProvider';
+import GlobalContext from '../utils/globalContext';
 import actions from '../state/actions';
 
 class RouterLink extends React.Component {

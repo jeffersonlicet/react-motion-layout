@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import actions from '../state/actions';
 import { componentTypes } from '../utils/constants';
 
-import { GlobalContext } from './MotionProvider';
+import GlobalContext from '../utils/globalContext';
 import { ScreenContext } from './MotionScreen';
 
 export const ViewContext = React.createContext();
@@ -14,29 +14,28 @@ class InternalMotionScene extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    const { name } = props;
     this.animationTimeout = null;
     this.state = {
-      isTargetView: context.store.exitView === props.name,
+      isTargetView: false,
       animate: false,
       animationQueue: 0,
     };
+  }
 
-    const type = context.store.views[props.name]
-      ? actions.view.updateViewScreen : actions.view.register;
+  componentDidMount() {
+    const { name, scrollUpOnEnter, screenContext } = this.props;
+    const { store, dispatch } = this.context;
+    const isTargetView = store.exitView === name;
+    this.setState({ isTargetView });
 
-    const { screenName } = props.screenContext || {};
+    const type = store.views[name] ? actions.view.updateViewScreen : actions.view.register;
+    const { screenName } = screenContext || {};
 
-    context.dispatch({
+    dispatch({
       type,
       viewName: name,
       screenName,
     });
-  }
-
-  componentDidMount() {
-    const { isTargetView } = this.state;
-    const { name, scrollUpOnEnter } = this.props;
 
     if (isTargetView) {
       console.log(`Source matches with this view: ${name}, dispatching animation`);
@@ -178,7 +177,6 @@ class InternalMotionScene extends React.Component {
         pointerEvents: 'none',
       };
 
-
       if (source.type === componentTypes.text
         && (source.settings.animateSize || source.settings.animateColor)) {
         const computedStyle = window.getComputedStyle(target.ref, null);
@@ -229,16 +227,27 @@ class InternalMotionScene extends React.Component {
   }
 
   render() {
-    const { name, children } = this.props;
+    const { name, children, onClick } = this.props;
     const { animate, isTargetView } = this.state;
     return (
       <ViewContext.Provider value={{ viewName: name }}>
-        <div
-          onClick={this.props.onClick}
-          style={{ transition: 'opacity 0.5s', opacity: animate || !isTargetView ? '1' : '0' }}
-        >
-          {children}
-        </div>
+        {React.cloneElement(children, {
+          ...children.props,
+          onClick: (e) => {
+            if (onClick) {
+              onClick(e);
+            }
+
+            if (children.onClick) {
+              children.onClick(e);
+            }
+          },
+          style: {
+            ...children.props.style,
+            transition: 'opacity 0.5s',
+            opacity: animate || !isTargetView ? '1' : '0',
+          },
+        })}
         {this.renderComponents()}
       </ViewContext.Provider>
     );
@@ -249,10 +258,14 @@ InternalMotionScene.propTypes = {
   name: PropTypes.string.isRequired,
   scrollUpOnEnter: PropTypes.bool,
   children: PropTypes.node.isRequired,
+  onClick: PropTypes.func,
+  screenContext: PropTypes.shape(PropTypes.object),
 };
 
 InternalMotionScene.defaultProps = {
   scrollUpOnEnter: false,
+  onClick: null,
+  screenContext: null,
 };
 
 InternalMotionScene.contextType = GlobalContext;

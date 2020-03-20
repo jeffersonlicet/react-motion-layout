@@ -2,8 +2,6 @@ import React from 'react';
 import Item from './FeedItem';
 import { items } from './Stories';
 
-import { MotionScene, MotionScreen } from 'react-motion-layout';
-
 export default function Feed() {
   return (
       <div className="p-10 pt-4">

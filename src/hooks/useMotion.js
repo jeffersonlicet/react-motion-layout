@@ -1,14 +1,18 @@
 import { useContext } from 'react';
 import actions from '../state/actions';
-import { GlobalContext } from '../components/MotionProvider';
+import GlobalContext from '../utils/globalContext';
 
 /*
   This hook provides a way of setting the originOfTransition
 */
 export default function useMotion(viewName) {
-  const { dispatch, store } = useContext(GlobalContext);
+  const { dispatch, store } = useContext(GlobalContext) || {};
   function withTransition(callback) {
     return () => {
+      if (!dispatch || !store) {
+        return;
+      }
+
       const { sources } = store.views[viewName];
 
       dispatch({

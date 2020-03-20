@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "dev": "rollup -c -w",
-    "build": "webpack",
+    "build": "rollup -c",
     "predeploy": "rollup -c && rm -rf package && mkdir package && cp -r dist package && cp package.json ./package"
   },
   "author": "",

@@ -8,3 +8,8 @@ export { default as MotionScreen } from './components/MotionScreen';
 export { default as RouterLink } from './components/RouterLink';
 
 export const SharedElement = { Image, Text };
+
+export function withAnimation(component) {
+  console.log('executing and creating context');
+  return component;
+}
