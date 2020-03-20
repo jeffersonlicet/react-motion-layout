@@ -36,13 +36,8 @@
   text-decoration: none;
 }
 
-.demo-height {
-  height: 450px;
-}
-
 .navbar__title {
   font-family: 'Baloo Chettan 2';
-  font-size: 24px;
   color: #ed64a6;
 }
 
@@ -111,4 +106,9 @@
 	    margin-top: 20px;
 	    opacity: 0;
 	}
+}
+
+.demo-box {
+  height: 450px;
+  width: 550px;
 }
