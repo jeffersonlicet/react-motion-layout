@@ -17,7 +17,9 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-icons": "^3.9.0",
-    "react-motion-layout": "file:.."
+    "react-motion-layout": "file:..",
+    "react-router-dom": "^5.1.2",
+    "tailwindcss": "^1.2.0"
   },
   "browserslist": {
     "production": [

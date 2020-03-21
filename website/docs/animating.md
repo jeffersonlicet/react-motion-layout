@@ -45,7 +45,7 @@ export const items = [
 ];
 ```
 
-### 3 Crete the Feed View
+### 3 Create the Feed View
 *Nothing new, just mapping items to the Item component*
 ```jsx
 // feed.jsx

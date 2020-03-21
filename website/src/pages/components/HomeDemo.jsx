@@ -3,11 +3,9 @@ import {
   MotionScreen, MotionScene, SharedElement, useMotion,
 } from 'react-motion-layout';
 
-// TODO: Friends list with friend view and url at the top
 export default function HomeDemo() {
   const [animated, setAnimated] = useState(false);
   const withTransition = useMotion('story-0');
-  const setAnimated2 = withTransition(() => setAnimated(!animated));
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -102,15 +100,15 @@ export default function HomeDemo() {
                 </div>
                 <div className="ml-4">
                   <div className="mb-4">
-                  <div className="flex flex-col">
-                  <SharedElement.Text animationKey="name" className="font-bold text-base leading-tight text-pink-400">
-                      Patricia
-                    </SharedElement.Text>
-                  </div>
-                  <div className="mt-2">
-                    <SharedElement.Text animationKey="body" className="font-normal text-gray-500 max-w-sm">
-                      Hey guys, as I promised here is my collection of vintage pictures. I hope you like it.
-                    </SharedElement.Text>
+                    <div className="flex flex-col">
+                      <SharedElement.Text animationKey="name" className="font-bold text-base leading-tight text-pink-400">
+                        Patricia
+                      </SharedElement.Text>
+                    </div>
+                    <div className="mt-2">
+                      <SharedElement.Text animationKey="body" className="font-normal text-gray-500 max-w-sm">
+                        Hey guys, as I promised here is my collection of vintage pictures. I hope you like it.
+                      </SharedElement.Text>
                     </div>
                   </div>
                   <SharedElement.Image
@@ -141,11 +139,6 @@ export default function HomeDemo() {
             </MotionScene>
           </MotionScreen>
         )}
-      </div>
-      <div className="mt-4 hidden">
-        <div className="mt-24">
-          <a href="#" onClick={setAnimated2} className="hover:text-white button_pink rounded-lg px-4 md:px-5 xl:px-4 py-3 md:py-4 xl:py-3 bg-pink-500 hover:bg-pink-600 md:text-lg xl:text-base text-white font-semibold leading-tight shadow-md">Get Started</a>
-        </div>
       </div>
     </>
   );

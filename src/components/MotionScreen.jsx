@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import GlobalContext from '../utils/globalContext';
 import actions from '../state/actions';
 
-console.log(GlobalContext);
 export const ScreenContext = React.createContext();
 
 export default class MotionScreen extends React.Component {

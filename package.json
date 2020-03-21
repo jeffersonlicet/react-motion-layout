@@ -1,18 +1,17 @@
 {
   "name": "react-motion-layout",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "Create beautiful immersive animations using shared component",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
-  "private": true,
   "scripts": {
     "dev": "rollup -c -w",
     "build": "rollup -c",
     "predeploy": "rollup -c && rm -rf package && mkdir package && cp -r dist package && cp package.json ./package"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Jefferson Licet",
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.8.7",
     "@babel/plugin-proposal-class-properties": "^7.8.3",

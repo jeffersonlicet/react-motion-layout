@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   title: 'React Motion Layout',
   tagline: 'Animate components',

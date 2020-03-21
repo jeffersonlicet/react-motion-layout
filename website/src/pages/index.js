@@ -1,16 +1,17 @@
 import React from 'react';
 import classnames from 'classnames';
+import { FiCode, FiArchive, FiList } from 'react-icons/fi';
 import Layout from '@theme/Layout';
 import { MotionLayoutProvider, withAnimation } from 'react-motion-layout';
 
-import { FiCode, FiArchive, FiList } from 'react-icons/fi';
 import Button from './components/Button';
 import HomeDemo from './components/HomeDemo';
+
 import styles from './styles.module.css';
 
 const features = [
   {
-    title: <>Declarative</>,
+    title: 'Declarative',
     icon: <FiCode size="45" />,
     description: (
       <div className="mt-6 leading-relaxed sm:text-lg md:text-xl xl:text-lg text-gray-600">
@@ -19,16 +20,16 @@ const features = [
     ),
   },
   {
-    title: <>Isolated</>,
+    title: 'Isolated',
     icon: <FiArchive size="45" />,
     description: (
       <div className="mt-6 leading-relaxed sm:text-lg md:text-xl xl:text-lg text-gray-600">
-        It doesn't require external state management libs.
+        It does not require external state management libs.
       </div>
     ),
   },
   {
-    title: <>Router Ready</>,
+    title: 'Router Ready',
     icon: <FiList size="45" />,
     description: (
       <div className="mt-6 leading-relaxed sm:text-lg md:text-xl xl:text-lg text-gray-600">
@@ -38,9 +39,7 @@ const features = [
   },
 ];
 
-function Feature({
-  imageUrl, title, description, icon,
-}) {
+function Feature({ title, description, icon }) {
   return (
     <div className={classnames('w-full lg:w-1/3 p-4 lg:pt-8 pb-2 lg:border border-gray-200 lg:shadow-sm lg:mr-2 rounded-lg flex flex-col items-center lg:ml-2 text-center', styles.feature)}>
       <div className="pb-4 primary opacity-50">
@@ -52,19 +51,21 @@ function Feature({
   );
 }
 
-// Home
+
 function Home() {
   return (
     <Layout
-      title="Create animations using shared components"
+      title="React Animations"
       description="Create beautiful immersive animations using shared components"
     >
-      <MotionLayoutProvider debug>
+      <MotionLayoutProvider>
         <header className="bg-gray-200 xl:min-h-screen">
           <div className="flex w-full justify-between flex-col lg:flex-row">
-            <div className="w-full lg:w-1/2 md:ml-8 xl:ml-16 ml-0 lg:mt-20 xl:mt-32 p-10 lg:p-0">
+            <div className="w-full lg:w-1/2 md:ml-8 xl:ml-16 ml-0 lg:mt-20 xl:mt-48 p-10 lg:p-0">
               <div className="text-5xl baloo font-bold primary leading-tight">Motion Layout</div>
-              <div className="text-4xl text-gray-500 mt-4 leading-tight">Create beautiful immersive animations using shared components.</div>
+              <div className="text-4xl text-gray-500 mt-4 leading-tight">
+                Create beautiful immersive animations using shared components.
+              </div>
               <div className="mt-12">
                 <Button to="/docs/installation">
                   Get Started
@@ -98,7 +99,10 @@ function Home() {
             <div className="text-5xl baloo text-white font-bold primary leading-tight">What?</div>
             <div className="mt-10 mb-20">
               <div className="text-center text-gray-600 px-8 lg:p-0 lg:text-xl max-w-3xl justify-center flex px-4">
-                There are amazing libraries like framer-motion that help you create animations when mounting or unmounting components. But, if two views have the same image in different positions and sizes, they cannot be animated together. With Motion Layout, you can link components together to animate them when changing views.
+                There are amazing libraries like framer-motion that help you create animations when mounting or
+                unmounting components. But, if two views have the same image in different positions and sizes,
+                they cannot be animated together. With Motion Layout, you can link components together to animate
+                them when changing views.
               </div>
             </div>
 

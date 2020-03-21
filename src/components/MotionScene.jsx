@@ -259,13 +259,11 @@ InternalMotionScene.propTypes = {
   scrollUpOnEnter: PropTypes.bool,
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
-  screenContext: PropTypes.shape(PropTypes.object),
 };
 
 InternalMotionScene.defaultProps = {
   scrollUpOnEnter: false,
   onClick: null,
-  screenContext: null,
 };
 
 InternalMotionScene.contextType = GlobalContext;

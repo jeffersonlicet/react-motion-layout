@@ -49,13 +49,13 @@
 }
 
 .mouse-icon {
-   width: 25px;
-   height: 45px;
-   border: 2px solid #a0aec0;
-   border-radius: 15px;
-   cursor: pointer;
-   position: relative;
-   text-align: center;
+  width: 25px;
+  height: 45px;
+  border: 2px solid #a0aec0;
+  border-radius: 15px;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
 }
 
 .mouse-wheel {
@@ -66,49 +66,54 @@
   background-color: #a0aec0;
   border-radius: 50%;
   -webkit-animation: 1.6s ease infinite wheel-up-down;
- -moz-animation: 1.6s ease infinite wheel-up-down;
+  -moz-animation: 1.6s ease infinite wheel-up-down;
   animation: 1.6s ease infinite wheel-up-down;
 }
 
 @-webkit-keyframes wheel-up-down {
 	0% {
-	    margin-top: 2px;
-	    opacity: 0;
-	}
+	  margin-top: 2px;
+	  opacity: 0;
+  }
+
 	30% {
-	    opacity: 1;
-	}
+	  opacity: 1;
+  }
+
 	100% {
-	    margin-top: 20px;
-	    opacity: 0;
-	}
-}@-moz-keyframes wheel-up-down {
-	0% {
-	    margin-top: 2px;
-	    opacity: 0;
-	}
-	30% {
-	    opacity: 1;
-	}
-	100% {
-	    margin-top: 20px;
-	    opacity: 0;
-	}
-}@keyframes wheel-up-down {
-	0% {
-	    margin-top: 2px;
-	    opacity: 0;
-	}
-	30% {
-	    opacity: 1;
-	}
-	100% {
-	    margin-top: 20px;
-	    opacity: 0;
+	  margin-top: 20px;
+	  opacity: 0;
 	}
 }
 
-.demo-box {
-  height: 450px;
-  width: 550px;
+@-moz-keyframes wheel-up-down {
+	0% {
+	  margin-top: 2px;
+	  opacity: 0;
+  }
+
+	30% {
+	  opacity: 1;
+  }
+
+	100% {
+	  margin-top: 20px;
+	  opacity: 0;
+	}
+}
+
+@keyframes wheel-up-down {
+	0% {
+	  margin-top: 2px;
+	  opacity: 0;
+  }
+
+	30% {
+	  opacity: 1;
+  }
+
+	100% {
+	  margin-top: 20px;
+	  opacity: 0;
+	}
 }

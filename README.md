@@ -3,7 +3,7 @@
 
 Create beautiful immersive animations using shared components.
 
-![GitHub Logo](https://media.giphy.com/media/Q5zrIAoOORc2SPttc1/giphy.gif)
+![MotionLayout Logo](https://media.giphy.com/media/Q5zrIAoOORc2SPttc1/giphy.gif)
 ___
 
 #### Declarative
