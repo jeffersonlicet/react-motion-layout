@@ -6,7 +6,6 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/react-motion-layout"><img src="https://img.shields.io/npm/v/react-motion-layout?style=flat-square"></a>
-
   <a href="https://bundlephobia.com/result?p=react-motion-layout@0.0.3"><img src="https://img.shields.io/bundlephobia/min/react-motion-layout?style=flat-square"></a>
 </p>
 
@@ -15,6 +14,7 @@
 <p align="center">
   <img src="https://media.giphy.com/media/Q5zrIAoOORc2SPttc1/giphy.gif">
 </p>
+
 ___
 
 ## Docs
