@@ -27,12 +27,6 @@ module.exports = {
           position: 'left',
         },
         {
-          to: 'examples/feed',
-          activeBasePath: 'examples/feed',
-          label: 'Examples',
-          position: 'left',
-        },
-        {
           href: 'https://github.com/jeffersonlicet/react-motion-layout',
           label: 'GitHub',
           position: 'right',

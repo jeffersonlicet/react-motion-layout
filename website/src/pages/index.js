@@ -6,8 +6,19 @@ import { MotionLayoutProvider, withAnimation } from 'react-motion-layout';
 
 import Button from './components/Button';
 import HomeDemo from './components/HomeDemo';
-
+import ButtonWhite from './components/ButtonWhite';
 import styles from './styles.module.css';
+
+const makeExample = (uri) => `<iframe
+  src="https://codesandbox.io/embed/${uri}?fontsize=14&hidenavigation=0&theme=light&view=preview"
+  style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;"
+  title="Chat-Example"
+  allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+  ></iframe>`;
+
+const exampleChat = makeExample('chat-example-dyyy1');
+const galleryExample = makeExample('instagram-example-b6gkm');
 
 const features = [
   {
@@ -95,7 +106,7 @@ function Home() {
               </div>
             </section>
           )}
-          <div className="flex justify-center py-10  flex-col items-center">
+          <div className="flex justify-center py-10 flex-col items-center pb-40">
             <div className="text-5xl baloo text-white font-bold primary leading-tight">What?</div>
             <div className="mt-10 mb-20">
               <div className="text-center text-gray-600 px-8 lg:p-0 lg:text-xl max-w-3xl justify-center flex px-4">
@@ -109,6 +120,54 @@ function Home() {
             <Button to="/docs/installation">
               Get Started
             </Button>
+          </div>
+
+          <div className="flex flex-col">
+            <div className="flex flex-col lg:flex-row justify-between chat-bg p-8 pt-8">
+              <div className="w-full lg:w-1/2 shadow-xl rounded-md border-box-1" style={{ marginTop: '-120px' }}>
+                <div id="example-chat" dangerouslySetInnerHTML={{ __html: galleryExample }} />
+              </div>
+
+              <div className="px-8 mt-8 lg:mt-0 flex flex-col text-white">
+                <h1 className="leading-tight">Gallery</h1>
+                <div className="text-xl">
+                  This example shows you how MotionLayout animate
+                  <b> images </b>
+                  using React Router.
+                </div>
+                <div className="leading-tight mt-8">Click on any image to navigate and dispatch the animation.</div>
+
+                <div className="mt-8">
+                  <ButtonWhite target="_blank" to="https://codesandbox.io/s/chat-example-dyyy1">
+                    View code on Sandbox
+                  </ButtonWhite>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex justify-between flex-col-reverse lg:flex-row chat-bg p-8 pt-12 pb-12">
+              <div className="px-8 mt-8 lg:mt-0 px-8 flex flex-col text-white">
+                <h1 className="leading-tight">Chat</h1>
+                <div className="text-xl">
+                  This example shows you how MotionLayout animate
+                  <b> images </b>
+                  and
+                  <b> text </b>
+                  using React Router.
+                </div>
+                <div className="leading-tight mt-8">Click on any message to navigate and dispatch the animation.</div>
+
+                <div className="mt-8">
+                  <ButtonWhite target="_blank" to="https://codesandbox.io/s/instagram-example-b6gkm">
+                    View code on Sandbox
+                  </ButtonWhite>
+                </div>
+              </div>
+
+              <div className="w-full lg:w-1/2 shadow-xl bg-white rounded-md">
+                <div id="example-chat" dangerouslySetInnerHTML={{ __html: exampleChat }} />
+              </div>
+            </div>
           </div>
         </main>
       </MotionLayoutProvider>

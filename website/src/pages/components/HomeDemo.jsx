@@ -4,6 +4,7 @@ import {
 } from 'react-motion-layout';
 
 export default function HomeDemo() {
+  const [count, setCounter] = useState(0);
   const [animated, setAnimated] = useState(false);
   const withTransition = useMotion('story-0');
 
@@ -11,10 +12,15 @@ export default function HomeDemo() {
     const interval = setInterval(() => {
       if (document.hasFocus()) {
         withTransition(() => setAnimated(!animated))();
+        setCounter(count + 1);
       }
     }, 2000);
+
+    if (count === 5) {
+      clearInterval(interval);
+    }
     return () => { clearInterval(interval); };
-  }, [animated, withTransition]);
+  }, [animated, withTransition, count]);
 
   return (
     <>
