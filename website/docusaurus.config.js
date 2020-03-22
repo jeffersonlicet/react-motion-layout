@@ -9,6 +9,9 @@ module.exports = {
   organizationName: 'jeffersonlicet', // Usually your GitHub org/user name.
   projectName: 'React Motion Layout', // Usually your repo name.
   themeConfig: {
+    googleAnalytics: {
+      trackingID: 'UA-56940433-12',
+    },
     prism: {
       theme: require('prism-react-renderer/themes/dracula'),
     },
@@ -98,4 +101,5 @@ module.exports = {
     'https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css',
     'https://fonts.googleapis.com/css?family=Baloo+Chettan+2:400,700&display=swap',
   ],
+  plugins: ['@docusaurus/plugin-google-analytics'],
 };
