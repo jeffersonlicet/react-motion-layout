@@ -20,6 +20,7 @@ class InternalMotionScene extends React.Component {
       isTargetView: false,
       animate: false,
       animationQueue: 0,
+      mounted: false,
     };
 
     if (context) {
@@ -43,6 +44,8 @@ class InternalMotionScene extends React.Component {
   componentDidMount() {
     const { isTargetView } = this.state;
     const { scrollUpOnEnter } = this.props;
+
+    this.setState({ mounted: true });
 
     if (isTargetView) {
       if (scrollUpOnEnter) {
@@ -112,6 +115,12 @@ class InternalMotionScene extends React.Component {
         animationKey,
       });
     });
+  }
+
+  shouldBeVisible = () => {
+    const { store } = this.context;
+    const { animate, mounted, isTargetView } = this.state;
+    return !store.exitView || animate || (mounted && !isTargetView);
   }
 
   renderComponents() {
@@ -225,7 +234,6 @@ class InternalMotionScene extends React.Component {
 
   render() {
     const { name, children, onClick } = this.props;
-    const { animate, isTargetView } = this.state;
     return (
       <ViewContext.Provider value={{ viewName: name }}>
         { React.cloneElement(children, {
@@ -241,8 +249,8 @@ class InternalMotionScene extends React.Component {
           },
           style: {
             ...children.props.style,
-            transition: 'opacity 0.5s',
-            opacity: animate || !isTargetView ? '1' : '0',
+            transition: 'opacity 0.4s',
+            opacity: this.shouldBeVisible() ? '1' : '0',
           },
         }) }
         {this.renderComponents()}
