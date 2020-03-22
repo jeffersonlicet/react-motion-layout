@@ -118,9 +118,9 @@ class InternalMotionScene extends React.Component {
   }
 
   shouldBeVisible = () => {
-    const { store } = this.context;
+    const { store } = this.context || {};
     const { animate, mounted, isTargetView } = this.state;
-    return !store.exitView || animate || (mounted && !isTargetView);
+    return !store || !store.exitView || animate || (mounted && !isTargetView);
   }
 
   renderComponents() {
