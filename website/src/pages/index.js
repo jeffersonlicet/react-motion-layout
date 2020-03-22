@@ -138,7 +138,7 @@ function Home() {
                 <div className="leading-tight mt-8">Click on any image to navigate and dispatch the animation.</div>
 
                 <div className="mt-8">
-                  <ButtonWhite target="_blank" to="https://codesandbox.io/s/chat-example-dyyy1">
+                  <ButtonWhite target="_blank" to="https://codesandbox.io/s/instagram-example-b6gkm">
                     View code on Sandbox
                   </ButtonWhite>
                 </div>
@@ -158,7 +158,7 @@ function Home() {
                 <div className="leading-tight mt-8">Click on any message to navigate and dispatch the animation.</div>
 
                 <div className="mt-8">
-                  <ButtonWhite target="_blank" to="https://codesandbox.io/s/instagram-example-b6gkm">
+                  <ButtonWhite target="_blank" to="https://codesandbox.io/s/chat-example-dyyy1">
                     View code on Sandbox
                   </ButtonWhite>
                 </div>
