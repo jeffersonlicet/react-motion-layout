@@ -15,35 +15,41 @@ class InternalMotionScene extends React.Component {
     super(props, context);
 
     this.animationTimeout = null;
+
     this.state = {
       isTargetView: false,
       animate: false,
       animationQueue: 0,
     };
+
+    if (context) {
+      const { name, screenContext } = props;
+      const { store, dispatch } = context;
+      const isTargetView = store.exitView === name;
+
+      const type = store.views[name] ? actions.view.updateViewScreen : actions.view.register;
+      const { screenName } = screenContext || {};
+
+      this.state.isTargetView = isTargetView;
+
+      dispatch({
+        type,
+        viewName: name,
+        screenName,
+      });
+    }
   }
 
   componentDidMount() {
-    const { name, scrollUpOnEnter, screenContext } = this.props;
-    const { store, dispatch } = this.context;
-    const isTargetView = store.exitView === name;
-    this.setState({ isTargetView });
-
-    const type = store.views[name] ? actions.view.updateViewScreen : actions.view.register;
-    const { screenName } = screenContext || {};
-
-    dispatch({
-      type,
-      viewName: name,
-      screenName,
-    });
+    const { isTargetView } = this.state;
+    const { scrollUpOnEnter } = this.props;
 
     if (isTargetView) {
-      console.log(`Source matches with this view: ${name}, dispatching animation`);
-
       if (scrollUpOnEnter) {
         window.scrollTo(0, 0);
       }
 
+      // Capture scroll position in case user scrolls during animation
       this.setState({
         scroll: {
           source: {
@@ -51,20 +57,12 @@ class InternalMotionScene extends React.Component {
             y: window.scrollY,
           },
         },
-      });
-
-      this.animationTimeout = setTimeout(this.startAnimation, 0);
+      }, this.startAnimation);
     }
   }
 
-  componentWillUnmount() {
-    clearTimeout(this.animationTimeout);
-  }
-
   startAnimation = () => {
-    this.setState({
-      animate: true,
-    });
+    this.setState({ animate: true });
   }
 
   onAnimationEnd = () => {
@@ -135,7 +133,6 @@ class InternalMotionScene extends React.Component {
 
     if (sourceKeys.length !== targetsKeys.length) {
       console.log('Missing target elements');
-      // return null;
     }
 
     return ReactDOM.createPortal(sourceKeys.map((key) => {
@@ -231,7 +228,7 @@ class InternalMotionScene extends React.Component {
     const { animate, isTargetView } = this.state;
     return (
       <ViewContext.Provider value={{ viewName: name }}>
-        {React.cloneElement(children, {
+        { React.cloneElement(children, {
           ...children.props,
           onClick: (e) => {
             if (onClick) {
@@ -247,7 +244,7 @@ class InternalMotionScene extends React.Component {
             transition: 'opacity 0.5s',
             opacity: animate || !isTargetView ? '1' : '0',
           },
-        })}
+        }) }
         {this.renderComponents()}
       </ViewContext.Provider>
     );
