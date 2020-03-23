@@ -175,4 +175,4 @@ function Home() {
   );
 }
 
-export default withAnimation(Home);
+export default Home;
