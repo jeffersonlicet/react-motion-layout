@@ -66,7 +66,7 @@ function Feature({ title, description, icon }) {
 function Home() {
   return (
     <Layout
-      title="React Animations"
+      title="Immersive React.js animations"
       description="Create beautiful immersive animations using shared components"
     >
       <MotionLayoutProvider>
