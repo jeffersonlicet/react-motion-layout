@@ -83,7 +83,7 @@ function Home() {
                 </Button>
               </div>
             </div>
-            <div className="w-full lg:w-auto lg:px-10 lg:mt-10 lg:mb-10 xl:mt-20">
+            <div className="w-full lg:w-auto lg:px-10 lg:mt-10 lg:mb-10 xl:mt-16">
               <HomeDemo />
             </div>
           </div>

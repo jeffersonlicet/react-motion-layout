@@ -22,12 +22,16 @@ export default function useMotion(viewName) {
 
       Object.keys(sources).forEach((animationKey) => {
         const { ref } = sources[animationKey];
-        dispatch({
-          type: actions.view.updateSourceRect,
-          rect: ref.getBoundingClientRect(),
-          viewName,
-          animationKey,
-        });
+        const rect = ref.getBoundingClientRect();
+        // Prevent updating if the ref is not in the screen
+        if (rect.width > 0 && rect.height > 0) {
+          dispatch({
+            type: actions.view.updateSourceRect,
+            rect,
+            viewName,
+            animationKey,
+          });
+        }
       });
 
       if (callback) {

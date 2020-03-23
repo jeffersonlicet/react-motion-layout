@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   MotionScreen, MotionScene, SharedElement, useMotion,
 } from 'react-motion-layout';
+import { FiArrowLeft, FiPlay } from 'react-icons/fi';
 
 export default function HomeDemo() {
-  const [count, setCounter] = useState(0);
   const [animated, setAnimated] = useState(false);
+  const [blocked, setBlocked] = useState(false);
   const withTransition = useMotion('story-0');
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (document.hasFocus()) {
-        withTransition(() => setAnimated(!animated))();
-        setCounter(count + 1);
-      }
-    }, 2000);
-
-    if (count === 5) {
-      clearInterval(interval);
+  const animate = useCallback(() => {
+    if (blocked) {
+      return;
     }
-    return () => { clearInterval(interval); };
-  }, [animated, withTransition, count]);
+
+    setBlocked(true);
+    withTransition(() => {
+      setAnimated(!animated);
+      setBlocked(false);
+    })();
+  },
+  [withTransition, animated, blocked]);
 
   return (
     <>
@@ -52,18 +52,18 @@ export default function HomeDemo() {
                   <div className="flex my-8">
 
                     <img
-                      className="h-32 rounded-lg object-cover"
+                      className="h-40 rounded-lg object-cover"
                       src="https://images.unsplash.com/photo-1502120492606-fba13cc63721?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
                     />
                     <div className="ml-2">
                       <SharedElement.Image
                         animationKey="big-image"
-                        className="h-32 rounded-lg object-cover"
+                        className="h-40 rounded-lg object-cover"
                         src="https://images.unsplash.com/photo-1527786356703-4b100091cd2c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80"
                       />
                     </div>
                     <img
-                      className="h-32 rounded-lg object-cover ml-2"
+                      className="h-40 rounded-lg object-cover ml-2"
                       src="https://images.unsplash.com/photo-1516962126636-27ad087061cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                     />
 
@@ -145,6 +145,14 @@ export default function HomeDemo() {
             </MotionScene>
           </MotionScreen>
         )}
+      </div>
+      <div className="mt-4 inline-block mb-8 ml-4 lg:ml-0">
+        <div onClick={animate} className="p-4 bg-white rounded-md flex items-center shadow-md text-gray-600 cursor-pointer">
+          {animated ? <FiArrowLeft /> : <FiPlay />}
+          <div className="ml-4 font-medium ">
+            {animated ? 'Go back' : 'Run animation'}
+          </div>
+        </div>
       </div>
     </>
   );

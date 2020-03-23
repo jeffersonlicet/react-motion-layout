@@ -15,6 +15,7 @@ class InternalMotionScene extends React.Component {
     super(props, context);
 
     this.animationTimeout = null;
+    this.endTimeout = null;
 
     this.state = {
       isTargetView: false,
@@ -62,6 +63,16 @@ class InternalMotionScene extends React.Component {
         },
       }, this.startAnimation);
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.endTimeout);
+  }
+
+  shouldBeVisible = () => {
+    const { store } = this.context || {};
+    const { animate, mounted, isTargetView } = this.state;
+    return !store || !store.exitView || animate || (mounted && !isTargetView);
   }
 
   startAnimation = () => {
@@ -115,12 +126,6 @@ class InternalMotionScene extends React.Component {
         animationKey,
       });
     });
-  }
-
-  shouldBeVisible = () => {
-    const { store } = this.context || {};
-    const { animate, mounted, isTargetView } = this.state;
-    return !store || !store.exitView || animate || (mounted && !isTargetView);
   }
 
   renderComponents() {
@@ -215,7 +220,7 @@ class InternalMotionScene extends React.Component {
         transition: { duration: 0.4 },
         onAnimationComplete: () => {
           if (animationQueue + 1 === Object.keys(sources).length) {
-            setTimeout(this.onAnimationEnd, 300);
+            this.endTimeout = setTimeout(this.onAnimationEnd, 100);
           } else {
             this.setState((state) => ({ animationQueue: state.animationQueue + 1 }));
           }
