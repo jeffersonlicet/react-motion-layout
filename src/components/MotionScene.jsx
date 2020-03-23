@@ -134,6 +134,24 @@ class InternalMotionScene extends React.Component {
         animationKey,
       });
     });
+
+
+    // Remove other screen sources
+    const { screenContext } = this.props;
+
+    if (screenContext) {
+      const { screenName } = screenContext;
+      if (screenName) {
+        Object.keys(store.views).forEach((view) => {
+          if (store.views[view].screenName && store.views[view].screenName !== screenName) {
+            dispatch({
+              type: actions.view.remove,
+              viewName: view,
+            });
+          }
+        });
+      }
+    }
   }
 
   renderComponents() {

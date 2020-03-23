@@ -5,15 +5,28 @@ import actions from '../state/actions';
 
 export const ScreenContext = React.createContext();
 
+function randomString() {
+  return Math.random().toString(36).substr(2, 5) + Math.random().toString(36).substr(2, 5);
+}
+
 export default class MotionScreen extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    const { name } = props;
+    this.state = {
+      name: name || randomString(),
+    };
+  }
+
   componentDidMount() {
     const { dispatch } = this.context;
-    const { name } = this.props;
+    const { name } = this.state;
     dispatch({ type: actions.view.setScreen, screen: name });
   }
 
   render() {
-    const { name, children } = this.props;
+    const { children } = this.props;
+    const { name } = this.state;
     return (
       <ScreenContext.Provider value={{ screenName: name }}>
         {children}
@@ -25,6 +38,10 @@ export default class MotionScreen extends React.Component {
 MotionScreen.contextType = GlobalContext;
 
 MotionScreen.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   children: PropTypes.node.isRequired,
+};
+
+MotionScreen.defaultProps = {
+  name: null,
 };
