@@ -13,6 +13,12 @@ export default function useMotion(viewName) {
         return;
       }
 
+      if (!store.views[viewName]) {
+        console.warn(`${viewName} is not registered, maybe you have misspelled the MotionScene name?`);
+        callback();
+        return;
+      }
+
       const { sources } = store.views[viewName];
 
       dispatch({

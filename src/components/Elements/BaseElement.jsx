@@ -18,10 +18,17 @@ export default class BaseElement extends React.Component {
     } = this.props;
 
     if (!animationKey) {
-      throw new Error('You should prove an animationKey');
+      console.warn('No animation key provided for component', children, 'it will be skipped');
+      return;
     }
 
     const { viewName } = viewContext;
+
+    if (!viewName) {
+      console.warn('Skipping SharedElement registration, MotionScene is invalid');
+      return;
+    }
+
     const { dispatch } = globalContext;
 
     if (ref) {
@@ -66,10 +73,17 @@ BaseElement.propTypes = {
     dispatch: PropTypes.func.isRequired,
   }).isRequired,
   viewContext: PropTypes.shape({
-    viewName: PropTypes.string.isRequired,
-  }).isRequired,
+    viewName: PropTypes.string,
+  }),
   type: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
-  animationKey: PropTypes.string.isRequired,
+  animationKey: PropTypes.string,
   settings: PropTypes.shape({}).isRequired,
+};
+
+BaseElement.defaultProps = {
+  animationKey: null,
+  viewContext: {
+    viewName: null,
+  },
 };

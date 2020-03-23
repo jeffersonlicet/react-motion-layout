@@ -22,7 +22,13 @@ class InternalMotionScene extends React.Component {
       animate: false,
       animationQueue: 0,
       mounted: false,
+      validScene: context && context.store.views[props.name],
     };
+
+    if (!props.name) {
+      console.warn('MotionScene requires a name');
+      return;
+    }
 
     if (context) {
       const { name, screenContext } = props;
@@ -71,8 +77,10 @@ class InternalMotionScene extends React.Component {
 
   shouldBeVisible = () => {
     const { store } = this.context || {};
-    const { animate, mounted, isTargetView } = this.state;
-    return !store || !store.exitView || animate || (mounted && !isTargetView);
+    const {
+      animate, mounted, isTargetView, validScene,
+    } = this.state;
+    return !store || !store.exitView || !validScene || animate || (mounted && !isTargetView);
   }
 
   startAnimation = () => {
@@ -265,7 +273,7 @@ class InternalMotionScene extends React.Component {
 }
 
 InternalMotionScene.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   scrollUpOnEnter: PropTypes.bool,
   children: PropTypes.node.isRequired,
   onClick: PropTypes.func,
@@ -274,6 +282,7 @@ InternalMotionScene.propTypes = {
 InternalMotionScene.defaultProps = {
   scrollUpOnEnter: false,
   onClick: null,
+  name: null,
 };
 
 InternalMotionScene.contextType = GlobalContext;
