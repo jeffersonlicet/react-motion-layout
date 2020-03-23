@@ -2,7 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import { FiCode, FiArchive, FiList } from 'react-icons/fi';
 import Layout from '@theme/Layout';
-import { MotionLayoutProvider, withAnimation } from 'react-motion-layout';
+import { MotionLayoutProvider } from 'react-motion-layout';
 
 import Button from './components/Button';
 import HomeDemo from './components/HomeDemo';

@@ -57,7 +57,7 @@ module.exports = {
           items: [
             {
               label: 'Credits',
-              href: 'credits/libs',
+              href: 'credits',
             },
             {
               label: 'Stack Overflow',
