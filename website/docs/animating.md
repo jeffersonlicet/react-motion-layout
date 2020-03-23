@@ -46,16 +46,21 @@ export const items = [
 ```
 
 ### 3 Create the Feed View
-*Nothing new, just mapping items to the Item component*
+Since this is an individual screen, we wrap it using MotionScreen to clean registered elements when
+abandoning this screen.
 ```jsx
 // feed.jsx
 ...
-
+import { MotionScreen } from 'react-motion-layout';
 import { items } from './stories';
 import Item from './Item';
 
 export default function Feed() {
-  return items.map((data, i) => <Item data={data} key={i} />);
+  return (
+    <MotionScreen>
+      {items.map((data, i) => <Item data={data} key={i} />)}
+    </MotionScreen>
+  );
 }
 ```
 
@@ -99,7 +104,7 @@ The Story View is wrapped by a MotionScene as well, when navigating, those scene
 // story.jsx
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { SharedElement, MotionScene } from 'react-motion-layout';
+import { SharedElement, MotionScene, MotionScreen } from 'react-motion-layout';
 
 import { items } from './stories';
 
@@ -108,12 +113,14 @@ export default function Story({ data }) {
   const { image, text } = items[storyId];
 
   return (
-    <MotionScene name={`story-${storyId}`} scrollUpOnEnter>
-      <SharedElement.Text animationKey="text-main">
-        {text}
-      </SharedElement.Text>
-      <SharedElement.Image animationKey="big-image" src={image} />
-    </MotionScene>
+    <MotionScreen>
+      <MotionScene name={`story-${storyId}`} scrollUpOnEnter>
+        <SharedElement.Text animationKey="text-main">
+          {text}
+        </SharedElement.Text>
+        <SharedElement.Image animationKey="big-image" src={image} />
+      </MotionScene>
+    </MotionScreen>
   );
 }
 ```

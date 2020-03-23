@@ -15,4 +15,4 @@ since a simple view can contain multiple MotionScenes, MotionScreen helps track 
 | Name          |      type     |   required |
 | ------------- | :-----------: | -----:   |
 | children      |   Node        | true |
-| name     |   string    |   true |
+| name     |   string    |   false |
