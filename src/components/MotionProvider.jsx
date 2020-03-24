@@ -1,3 +1,5 @@
+import 'web-animations-js';
+
 import React, {
   useReducer, useCallback, useEffect, useState, useMemo,
 } from 'react';
