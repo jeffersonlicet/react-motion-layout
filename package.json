@@ -10,7 +10,7 @@
     "build": "rollup -c",
     "predeploy": "rollup -c && rm -rf package && mkdir package && cp -r dist package && cp package.json ./package"
   },
-  "author": "Jefferson Licet",
+  "author": "Jefferson Licet <jeffersonlicet@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.8.7",
@@ -51,5 +51,13 @@
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "react",
+    "framer",
+    "motion",
+    "router",
+    "animation",
+    "transition"
   ]
 }
