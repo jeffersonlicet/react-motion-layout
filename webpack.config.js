@@ -26,12 +26,6 @@ module.exports = {
       commonjs: 'react-router-dom',
       amd: 'react-router-dom',
     },
-    'framer-motion': {
-      root: 'FramerMotion',
-      commonjs2: 'framer-motion',
-      commonjs: 'framer-motion',
-      amd: 'framer-motion',
-    },
   },
   output: {
     path: path.resolve(__dirname, 'dist'),

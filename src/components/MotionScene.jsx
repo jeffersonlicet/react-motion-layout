@@ -71,6 +71,17 @@ class InternalMotionScene extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.animationQueue !== this.state.animationQueue) {
+      const { store } = this.context;
+      const { name } = this.props;
+      const { sources } = store.views[name] || {};
+      if (this.state.animationQueue === Object.keys(sources).length) {
+        this.endTimeout = setTimeout(this.onAnimationEnd, 100);
+      }
+    }
+  }
+
   componentWillUnmount() {
     clearTimeout(this.endTimeout);
   }
@@ -156,7 +167,7 @@ class InternalMotionScene extends React.Component {
 
   renderComponents() {
     const {
-      isTargetView, animate, animationQueue, scroll,
+      isTargetView, animate, scroll,
     } = this.state;
 
     if (!isTargetView || !scroll) {
@@ -179,8 +190,8 @@ class InternalMotionScene extends React.Component {
       const source = sources[key];
       const target = targets[key];
 
-      let fontSize;
-      let color;
+      let targetFontSize;
+      let targetColor;
 
       if (!target) {
         console.log(`Not target for ${key}`);
@@ -196,60 +207,60 @@ class InternalMotionScene extends React.Component {
       const targetRect = target.ref.getBoundingClientRect();
 
       const points = this.getPoints(rect, targetRect);
+
       const style = {
         marginTop: '0px !important',
         marginLeft: '0px !important',
         marginBottom: '0px !important',
         marginRight: '0px !important',
         position: 'absolute',
-        x: points.source.x,
-        y: points.source.y,
-        willChange: 'transform, width, height',
         top: 0,
         left: 0,
-        right: 0,
         bottom: 0,
-        width: `${rect.width}px`,
-        height: `${rect.height}px`,
         pointerEvents: 'none',
+        transition: 'font-size 0.4s, color 0.4s',
       };
 
       if (source.type === componentTypes.text
         && (source.settings.animateSize || source.settings.animateColor)) {
-        const computedStyle = window.getComputedStyle(target.ref, null);
+        const targetComputedStyle = window.getComputedStyle(target.ref, null);
         if (source.settings.animateSize) {
-          fontSize = `${parseFloat(computedStyle.getPropertyValue('font-size'))}px`;
+          targetFontSize = `${parseFloat(targetComputedStyle.getPropertyValue('font-size'))}px`;
         }
 
         if (source.settings.animateColor) {
-          color = computedStyle.getPropertyValue('color');
+          targetColor = targetComputedStyle.getPropertyValue('color');
         }
       }
 
-      const animateProps = {
-        target: {
-          width: `${targetRect.width}px`,
-          height: `${targetRect.height}px`,
-          x: points.dest.x,
-          y: points.dest.y,
-          color,
-          fontSize,
-        },
+      const xPosition = points.dest.x;
+      const yPosition = points.dest.y;
+
+      const initialAnimation = {
+        width: `${rect.width}px`,
+        height: `${rect.height}px`,
+        transform: `translate3d(${points.source.x}px, ${points.source.y}px, 0)`,
+      };
+
+      const endAnimation = {
+        width: `${targetRect.width}px`,
+        height: `${targetRect.height}px`,
+        transform: `translate3d(${xPosition}px, ${yPosition}px, 0)`,
       };
 
       target.ref.style.opacity = 0;
 
       const props = {
-        initial: false,
         style,
-        animate: animate ? animateProps.target : {},
-        transition: { duration: 0.4 },
+        initialAnimation,
+        endAnimation,
+        cssChange: {
+          color: targetColor,
+          'font-size': targetFontSize,
+        },
+        animate,
         onAnimationComplete: () => {
-          if (animationQueue + 1 === Object.keys(sources).length) {
-            this.endTimeout = setTimeout(this.onAnimationEnd, 100);
-          } else {
-            this.setState((state) => ({ animationQueue: state.animationQueue + 1 }));
-          }
+          this.setState((state) => ({ animationQueue: state.animationQueue + 1 }));
         },
       };
 

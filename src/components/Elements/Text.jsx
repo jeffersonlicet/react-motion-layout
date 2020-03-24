@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { motion } from 'framer-motion';
 import { componentTypes } from '../../utils/constants';
 import BaseElement, { ContextProvider } from './BaseElement';
+import MotionImageForwardRef from '../MotionForward';
 
 export default function Text({
   animationKey, animateColor, animateSize, ...props
@@ -18,7 +18,7 @@ export default function Text({
           viewContext={viewContext}
           screenContext={screenContext}
         >
-          <motion.div {...props} />
+          <MotionImageForwardRef type="text" {...props} />
         </BaseElement>
       )}
     </ContextProvider>

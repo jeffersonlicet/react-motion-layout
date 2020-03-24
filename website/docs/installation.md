@@ -4,13 +4,13 @@ title: Installation Guide
 sidebar_label: Installation Guide
 ---
 
-Motion Layout requires React 16.8 or greater and Framer-motion.
+Motion Layout requires React 16.8 or greater.
 
 ### Installation
 
-Install react-motion-layout, react-router-dom and framer-motion from npm.
+Install react-motion-layout and react-router-dom from npm.
 
-`npm i react-router-dom framer-motion react-motion-layout --save`
+`npm i react-router-dom react-motion-layout --save`
 
 ### Importing
 

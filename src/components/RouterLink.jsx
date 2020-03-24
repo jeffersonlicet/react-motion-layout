@@ -28,7 +28,6 @@ class RouterLink extends React.Component {
         }, {});
 
       if (num[store.screen].length === 1) {
-        console.log('Just one Motion Scene, trigger');
         const activeView = num[store.screen][0];
         dispatch({
           type: actions.view.setExitView,
