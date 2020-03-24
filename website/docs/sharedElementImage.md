@@ -6,7 +6,7 @@ title: SharedElement.Image
 Renders an Image
 
 ``` jsx
-<SharedElement.Text />
+<SharedElement.Image />
 ```
 
 ### Props
