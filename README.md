@@ -22,6 +22,18 @@ ___
 
 ## About
 
+#### Browser support
+Supported on modern versions of all major browsers including:
+
+- Chrome 56+
+- Firefox 27+
+- IE10+ (including Edge)
+- Safari (iOS) 7.1+
+- Safari (Mac) 9+
+- Firefox Mobile
+- Chrome for Android
+- Android Webview
+
 #### Declarative
 Easy as wraping your text or images with our SharedElement component.
 
