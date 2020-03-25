@@ -1,4 +1,3 @@
-import 'web-animations-js';
 
 import React, {
   useReducer, useCallback, useEffect, useState, useMemo,
@@ -8,6 +7,10 @@ import PropTypes from 'prop-types';
 import { reducer, initialState } from '../state/reducer';
 
 import GlobalContext from '../utils/globalContext';
+
+if (typeof window !== 'undefined') {
+  require('web-animations-js');
+}
 
 export default function MotionProvider({ children, debug }) {
   const [store, internalDispatch] = useReducer(reducer, initialState);
