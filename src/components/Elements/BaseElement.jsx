@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { componentTypes } from '../../utils/constants';
 
 import actions from '../../state/actions';
 import GlobalContext from '../../utils/globalContext';
@@ -32,9 +33,30 @@ export default class BaseElement extends React.Component {
     const { dispatch } = globalContext;
 
     if (ref) {
+      const { width, height, x, y } = ref.getBoundingClientRect();
+
+      let fontSize;
+      let color;
+
+      const computedStyle = window.getComputedStyle(ref, null);
+
+      if (settings.animateSize) {
+        fontSize = `${parseFloat(computedStyle.getPropertyValue('font-size'))}px`;
+      }
+
+      if (settings.animateColor) {
+        color = computedStyle.getPropertyValue('color');
+      }
+
+      const styles = {
+        fontSize,
+        color,
+      };
+
       const component = {
         ref,
-        rect: ref.getBoundingClientRect(),
+        rect: { width, height, x, y },
+        styles: type === componentTypes.text ? styles : {},
         component: children,
         type,
         settings,

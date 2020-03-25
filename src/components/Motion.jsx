@@ -1,7 +1,5 @@
 import React from 'react';
-
-const IMAGE = 'image';
-const TEXT = 'text';
+import { componentTypes } from '../utils/constants';
 
 export default class Motion extends React.Component {
   constructor(props, context) {
@@ -23,11 +21,15 @@ export default class Motion extends React.Component {
   getAnimationProps = (props) => {
     const { type } = this.props;
     switch (type) {
-      case TEXT:
+      case componentTypes.text:
         return {
+          width: props.width,
+          height: props.height,
           transform: props.transform,
+          ...(props.fontSize ? { fontSize: props.fontSize } : {}),
+          ...(props.color ? { color: props.color } : {}),
         };
-      case IMAGE:
+      case componentTypes.image:
         return props;
       default:
         return {};
@@ -55,7 +57,7 @@ export default class Motion extends React.Component {
   }
 
   dispatchAnimation = () => {
-    const { onAnimationComplete, cssChange } = this.props;
+    const { onAnimationComplete } = this.props;
 
     this.animation = this.ref.animate([
       this.initialAnimationProps(),
@@ -71,18 +73,6 @@ export default class Motion extends React.Component {
         onAnimationComplete();
       }
     }, 400);
-
-    let animationFrame = (fn) => fn();
-
-    if (typeof window.requestAnimationFrame === 'function') {
-      animationFrame = window.requestAnimationFrame;
-    }
-
-    animationFrame(() => {
-      Object.keys(cssChange).forEach((change) => {
-        this.ref.style[change] = cssChange[change];
-      });
-    });
   }
 
   getAllowedProps = () => {
@@ -102,9 +92,9 @@ export default class Motion extends React.Component {
     };
 
     switch (type) {
-      case IMAGE:
+      case componentTypes.image:
         return <img {...props} />;
-      case TEXT:
+      case componentTypes.text:
         return <div {...props} />;
       default:
         return null;

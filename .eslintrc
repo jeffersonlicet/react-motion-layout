@@ -21,6 +21,7 @@
     "react/prop-types": 0,
     "jsx-a11y/alt-text": 0,
     "react/destructuring-assignment": 0,
+    "object-curly-newline": 0
   },
   "globals": {
     "document": true,
