@@ -12,7 +12,9 @@ function randomString() {
 export default class MotionScreen extends React.Component {
   constructor(props, context) {
     super(props, context);
+
     const { name } = props;
+
     this.state = {
       name: name || randomString(),
     };

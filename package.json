@@ -1,6 +1,6 @@
 {
   "name": "react-motion-layout",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "Create beautiful immersive animations using shared component",
   "main": "dist/index.js",
   "module": "dist/index.es.js",

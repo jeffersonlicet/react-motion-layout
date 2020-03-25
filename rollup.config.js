@@ -11,12 +11,12 @@ export default {
     {
       file: pkg.main,
       format: 'cjs',
-      sourcemap: true
+      sourcemap: true,
     },
     {
       file: pkg.module,
       format: 'es',
-      sourcemap: true
+      sourcemap: true,
     },
   ],
   plugins: [
@@ -26,7 +26,7 @@ export default {
     }),
     babel({
       exclude: 'node_modules/**',
-      presets: ['@babel/preset-env', '@babel/preset-react']
+      presets: ['@babel/preset-env', '@babel/preset-react'],
     }),
     commonjs(),
   ],

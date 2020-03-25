@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 
 import actions from '../state/actions';
-import { componentTypes } from '../utils/constants';
 
 import GlobalContext from '../utils/globalContext';
 import { ScreenContext } from './MotionScreen';
@@ -146,7 +145,6 @@ class InternalMotionScene extends React.Component {
       });
     });
 
-
     // Remove other screen sources
     const { screenContext } = this.props;
 
@@ -190,9 +188,6 @@ class InternalMotionScene extends React.Component {
       const source = sources[key];
       const target = targets[key];
 
-      let targetFontSize;
-      let targetColor;
-
       if (!target) {
         console.log(`Not target for ${key}`);
         return null;
@@ -203,7 +198,7 @@ class InternalMotionScene extends React.Component {
         return null;
       }
 
-      const { rect } = source;
+      const { rect, styles } = source;
       const targetRect = target.ref.getBoundingClientRect();
 
       const points = this.getPoints(rect, targetRect);
@@ -221,18 +216,6 @@ class InternalMotionScene extends React.Component {
         transition: 'font-size 0.4s, color 0.4s',
       };
 
-      if (source.type === componentTypes.text
-        && (source.settings.animateSize || source.settings.animateColor)) {
-        const targetComputedStyle = window.getComputedStyle(target.ref, null);
-        if (source.settings.animateSize) {
-          targetFontSize = `${parseFloat(targetComputedStyle.getPropertyValue('font-size'))}px`;
-        }
-
-        if (source.settings.animateColor) {
-          targetColor = targetComputedStyle.getPropertyValue('color');
-        }
-      }
-
       const xPosition = points.dest.x;
       const yPosition = points.dest.y;
 
@@ -240,12 +223,16 @@ class InternalMotionScene extends React.Component {
         width: `${rect.width}px`,
         height: `${rect.height}px`,
         transform: `translate3d(${points.source.x}px, ${points.source.y}px, 0)`,
+        fontSize: styles.fontSize,
+        color: styles.color,
       };
 
       const endAnimation = {
         width: `${targetRect.width}px`,
         height: `${targetRect.height}px`,
         transform: `translate3d(${xPosition}px, ${yPosition}px, 0)`,
+        fontSize: target.styles.fontSize,
+        color: target.styles.color,
       };
 
       target.ref.style.opacity = 0;
@@ -254,10 +241,6 @@ class InternalMotionScene extends React.Component {
         style,
         initialAnimation,
         endAnimation,
-        cssChange: {
-          color: targetColor,
-          'font-size': targetFontSize,
-        },
         animate,
         onAnimationComplete: () => {
           this.setState((state) => ({ animationQueue: state.animationQueue + 1 }));
