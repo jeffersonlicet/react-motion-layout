@@ -1,9 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
-import { FiCode, FiArchive, FiList } from 'react-icons/fi';
+import { FiCode, FiArchive, FiLink } from 'react-icons/fi';
 import Layout from '@theme/Layout';
 import { MotionLayoutProvider } from 'react-motion-layout';
-
 import Button from './components/Button';
 import HomeDemo from './components/HomeDemo';
 import ButtonWhite from './components/ButtonWhite';
@@ -41,7 +40,7 @@ const features = [
   },
   {
     title: 'Router Ready',
-    icon: <FiList size="45" />,
+    icon: <FiLink size="45" />,
     description: (
       <div className="mt-6 leading-relaxed sm:text-lg md:text-xl xl:text-lg text-gray-600">
         Dispatch animations when changing routes using our React-Router Link component.
@@ -66,8 +65,8 @@ function Feature({ title, description, icon }) {
 function Home() {
   return (
     <Layout
-      title="Immersive React.js animations"
-      description="Create beautiful immersive animations using shared components"
+      title="React.js hero animations"
+      description="Create beautiful immersive React.js hero animations."
     >
       <MotionLayoutProvider>
         <header className="bg-gray-200 xl:min-h-screen">
@@ -75,7 +74,7 @@ function Home() {
             <div className="w-full lg:w-1/2 md:ml-8 xl:ml-16 ml-0 lg:mt-20 xl:mt-48 p-10 lg:p-0">
               <div className="text-5xl baloo font-bold primary leading-tight">Motion Layout</div>
               <div className="text-4xl text-gray-500 mt-4 leading-tight">
-                Create beautiful immersive animations using shared components.
+                Create beautiful immersive hero animations using shared components.
               </div>
               <div className="mt-12">
                 <Button to="/docs/installation">
@@ -120,6 +119,10 @@ function Home() {
             <Button to="/docs/installation">
               Get Started
             </Button>
+
+            <div className="text-4xl baloo text-white font-bold primary leading-tight mt-8">
+              Or scroll down to see it in action
+            </div>
           </div>
 
           <div className="flex flex-col">

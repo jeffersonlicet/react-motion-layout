@@ -1,7 +1,7 @@
 {
   "name": "react-motion-layout",
   "version": "0.0.15",
-  "description": "Create beautiful immersive animations using shared component",
+  "description": "Create beautiful immersive hero animations using shared components.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -57,6 +57,7 @@
     "motion",
     "router",
     "animation",
-    "transition"
+    "transition",
+    "hero"
   ]
 }

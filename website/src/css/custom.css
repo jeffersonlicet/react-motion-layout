@@ -130,3 +130,17 @@
   background: -webkit-linear-gradient(to left, #B06AB3, #4568DC);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #B06AB3, #4568DC);
 }
+
+@media (min-width: 640px) {
+  .demo-box {
+    width: 100%;
+    height: 500px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .demo-box {
+    width: 500px;
+    height: 500px;
+  }
+}

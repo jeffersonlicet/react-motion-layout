@@ -11,13 +11,6 @@ function Home() {
       <div className="flex flex-col p-4">
         <h2>Thanks to</h2>
         <div className="mt-4 flex flex-col">
-          <div>
-            <h5>The foundation and the inspiration</h5>
-            <ButtonWhite to="https://www.framer.com/motion/" target="_blank">
-              Framer Motion
-            </ButtonWhite>
-          </div>
-
           <div className="mt-8">
             <h5>The amazing tool for generating Docs</h5>
             <ButtonWhite to="https://v2.docusaurus.io" target="_blank">

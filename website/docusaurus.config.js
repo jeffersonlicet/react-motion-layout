@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   title: 'React Motion Layout',
-  tagline: 'Immersive React.js animations',
+  tagline: 'Beautiful React.js hero animations.',
   url: 'http://jeffersonlicet.com/reacto-motion-layout',
   baseUrl: '/',
   favicon: 'img/favicon.ico',

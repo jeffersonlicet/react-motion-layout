@@ -10,7 +10,7 @@
 </p>
 
 
-<p align="center">Create beautiful immersive React.js animations using shared components.</p>
+<p align="center">Create beautiful immersive React.js hero animations using shared components.</p>
 <p align="center">
   <img src="https://media.giphy.com/media/Q5zrIAoOORc2SPttc1/giphy.gif">
 </p>
@@ -18,7 +18,7 @@
 ___
 
 ## Docs
-[React Motion Layout Docs](http://motion-layout.azurewebsites.net/)
+[React Motion Layout Docs](https://motion-layout.azurewebsites.net/)
 
 ## About
 
