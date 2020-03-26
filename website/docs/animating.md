@@ -108,7 +108,7 @@ import { SharedElement, MotionScene, MotionScreen } from 'react-motion-layout';
 
 import { items } from './stories';
 
-export default function Story({ data }) {
+export default function Story() {
   const { storyId } = useParams();
   const { image, text } = items[storyId];
 

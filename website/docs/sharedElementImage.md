@@ -13,7 +13,6 @@ Renders an Image
 
 | Name          |      type     |   required |
 | ------------- | :-----------: | -----:   |
-| children      |   Node        | true |
 | animationKey     |   string    |   true |
 | src      |   string        | true |
 | className      |   string        | false |
