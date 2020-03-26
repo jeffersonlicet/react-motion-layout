@@ -120,7 +120,7 @@ function Home() {
               Get Started
             </Button>
 
-            <div className="text-4xl baloo text-white font-bold primary leading-tight mt-8">
+            <div className="text-4xl baloo text-white font-bold primary leading-tight mt-8 text-center px-8">
               Or scroll down to see it in action
             </div>
           </div>
