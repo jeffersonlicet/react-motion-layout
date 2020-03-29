@@ -1,7 +1,6 @@
 import React, {
   useRef,
   useCallback,
-  useState,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -13,7 +12,7 @@ import actions from '../state/actions';
 import { ScreenContext } from './MotionScreen';
 import GlobalContext from '../utils/globalContext';
 
-export default function RenderTarget({ name, children, onClick, setAnimated }) {
+export default function RenderTarget({ name, children, onClick, easing }) {
   const mounted = useRef(false);
   const animatedComponentsCount = useRef(0);
   const animated = useRef(false);
@@ -39,8 +38,6 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
    * Clear all scenes, switch back to SourceMode and clear portal
    */
   const cleanUp = useCallback(() => {
-    console.log('cleaning up');
-
     Object.keys(sources).forEach((animationKey) => {
       dispatch({
         type: actions.view.deleteTarget,
@@ -140,6 +137,7 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
 
       const finalProps = {
         ...props,
+        easing,
         key,
         style: { ...source.component.props.style, ...props.style, ...props.tween.start },
       };
@@ -148,7 +146,7 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
     });
 
     ReactDOM.render(AnimationComponents, portal);
-  }, [getPoints, portal, sources, targets, onAnimationComplete]);
+  }, [sources, portal, targets, getPoints, onAnimationComplete, easing]);
 
 
   /**

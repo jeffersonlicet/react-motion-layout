@@ -12,7 +12,6 @@ export const SceneContext = React.createContext();
  * source elements
  */
 export function MotionScene(props) {
-  const [animated, setAnimated] = useState(false);
   const { store } = useContext(GlobalContext) || {};
   const { exitView } = store || {};
 
@@ -23,14 +22,14 @@ export function MotionScene(props) {
   }, [props.scrollUpOnEnter]);
 
   const inTargetScene = useMemo(
-    () => exitView === props.name && !animated,
-    [animated, exitView, props.name],
+    () => exitView === props.name,
+    [exitView, props.name],
   );
 
   return (
-    <SceneContext.Provider value={{ sceneName: props.name }}>
+    <SceneContext.Provider value={{ sceneName: props.name, easing: props.easing }}>
       { inTargetScene
-        ? <MotionSceneTargets setAnimated={setAnimated} {...props} />
+        ? <MotionSceneTargets {...props} />
         : <MotionSceneSources {...props} />}
     </SceneContext.Provider>
   );

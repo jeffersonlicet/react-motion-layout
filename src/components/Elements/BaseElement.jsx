@@ -16,7 +16,7 @@ export default function BaseElement({
   animationKey, children, settings, type,
 }) {
   const mounted = useRef(false);
-  const { sceneName } = useContext(SceneContext);
+  const { sceneName, easing } = useContext(SceneContext);
   const { dispatch, store } = useContext(GlobalContext) || {};
   const { screenName } = useContext(ScreenContext);
 
@@ -62,5 +62,5 @@ export default function BaseElement({
     }
   }, [animationKey, sceneName, settings, isRegistered, type, children, dispatch, screenName]);
 
-  return React.cloneElement(children, { ...children.props, ref: attachRef });
+  return React.cloneElement(children, { ...children.props, ref: attachRef, easing });
 }

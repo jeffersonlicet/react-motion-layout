@@ -7,7 +7,7 @@ import { componentTypes } from '../utils/constants';
  * Runs tween animation on MotionScene childrens
  */
 export default function Motion({
-  animate, type, handleRef, tween, onAnimationComplete, ...props
+  animate, type, handleRef, tween, onAnimationComplete, easing, ...props
 }) {
   const animated = useRef(false);
   const timerReference = useRef(null);
@@ -28,17 +28,16 @@ export default function Motion({
       const { start, end } = keyframes(type, tween);
 
       timerReference.current = setTimeout(onAnimationComplete, 400);
-
       reference.animate([
         start,
         end,
       ], {
-        easing: 'ease',
+        easing: easing || 'ease',
         duration: 400,
         fill: 'forwards',
       });
     }
-  }, [animate, animated, tween, reference, onAnimationComplete, type]);
+  }, [animate, animated, tween, reference, onAnimationComplete, type, easing]);
 
   useEffect(() => clearTimeout(timerReference.current), []);
 
