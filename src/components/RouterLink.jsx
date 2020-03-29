@@ -20,9 +20,9 @@ class RouterLink extends React.Component {
 
       const method = replace ? history.replace : history.push;
 
-      const num = Object.keys(store.views)
+      const num = Object.keys(store.scenes)
         .reduce((acc, view) => {
-          const { screenName } = store.views[view];
+          const { screenName } = store.scenes[view];
           acc[screenName] = [...(acc[screenName] || []), view];
           return acc;
         }, {});
@@ -31,17 +31,17 @@ class RouterLink extends React.Component {
         const activeView = num[store.screen][0];
         dispatch({
           type: actions.view.setExitView,
-          viewName: num[store.screen][0],
+          sceneName: num[store.screen][0],
         });
 
-        const { sources } = store.views[activeView];
+        const { sources } = store.scenes[activeView];
 
         Object.keys(sources).forEach((animationKey) => {
           const { ref } = sources[animationKey];
           dispatch({
             type: actions.view.updateSourceRect,
             rect: ref.getBoundingClientRect(),
-            viewName: activeView,
+            sceneName: activeView,
             animationKey,
           });
         });

@@ -3,8 +3,9 @@ import actions from './actions';
 
 export const initialState = {
   exitView: null,
-  views: {},
+  scenes: {},
   screen: null,
+  exitScroll: null,
 };
 
 const initialView = {
@@ -17,8 +18,8 @@ export const reducer = (state, action) => {
   switch (action.type) {
     case actions.view.updateSourceRect:
       return update(state, {
-        views: {
-          [action.viewName]: {
+        scenes: {
+          [action.sceneName]: {
             sources: {
               [action.animationKey]: {
                 rect: { $set: action.rect },
@@ -29,21 +30,25 @@ export const reducer = (state, action) => {
       });
     case actions.view.setExitView:
       return update(state, {
-        exitView: { $set: action.viewName },
+        exitView: { $set: action.sceneName },
       });
     case actions.view.setScreen:
       return update(state, {
         screen: { $set: action.screen },
       });
+    case actions.view.setExitScroll:
+      return update(state, {
+        exitScroll: { $set: action.exitScroll },
+      });
 
     case actions.view.register:
       return update(state, {
-        views: { [action.viewName]: { $set: { ...initialView, screenName: action.screenName } } },
+        scenes: { [action.sceneName]: { $set: { ...initialView, screenName: action.screenName } } },
       });
     case actions.view.updateViewScreen:
       return update(state, {
-        views: {
-          [action.viewName]: {
+        scenes: {
+          [action.sceneName]: {
             screenName: { $set: action.screenName },
           },
         },
@@ -51,23 +56,40 @@ export const reducer = (state, action) => {
 
     case actions.view.remove:
       return update(state, {
-        views: { $unset: [action.viewName] },
+        scenes: { $unset: [action.sceneName] },
       });
 
-    case actions.view.registerSource:
+    case actions.view.registerSource: {
+      if (state.scenes[action.sceneName]) {
+        return update(state, {
+          scenes: {
+            [action.sceneName]: {
+              sources: {
+                [action.animationKey]: { $set: action.component },
+              },
+            },
+          },
+        });
+      }
+
       return update(state, {
-        views: {
-          [action.viewName]: {
-            sources: {
-              [action.animationKey]: { $set: action.component },
+        scenes: {
+          [action.sceneName]: {
+            $set: {
+              ...initialView,
+              screenName: action.screenName,
+              sources: {
+                [action.animationKey]: action.component,
+              },
             },
           },
         },
       });
+    }
     case actions.view.registerTarget:
       return update(state, {
-        views: {
-          [action.viewName]: {
+        scenes: {
+          [action.sceneName]: {
             targets: {
               [action.animationKey]: { $set: action.component },
             },
@@ -76,16 +98,16 @@ export const reducer = (state, action) => {
       });
     case actions.view.deleteTarget:
       return update(state, {
-        views: {
-          [action.viewName]: {
+        scenes: {
+          [action.sceneName]: {
             targets: { $unset: [action.animationKey] },
           },
         },
       });
     case actions.view.deleteSource:
       return update(state, {
-        views: {
-          [action.viewName]: {
+        scenes: {
+          [action.sceneName]: {
             sources: { $unset: [action.animationKey] },
           },
         },

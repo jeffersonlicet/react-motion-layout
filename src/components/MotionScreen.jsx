@@ -26,6 +26,12 @@ export default class MotionScreen extends React.Component {
     dispatch({ type: actions.view.setScreen, screen: name });
   }
 
+  componentWillUnmount() {
+    const { dispatch } = this.context;
+    const exitScroll = { x: window.scrollX, y: window.scrollY };
+    dispatch({ type: actions.view.setExitScroll, exitScroll });
+  }
+
   render() {
     const { children } = this.props;
     const { name } = this.state;

@@ -5,7 +5,7 @@ import GlobalContext from '../utils/globalContext';
 /*
   This hook provides a way of setting the originOfTransition
 */
-export default function useMotion(viewName) {
+export default function useMotion(sceneName) {
   const { dispatch, store } = useContext(GlobalContext) || {};
   function withTransition(callback) {
     return () => {
@@ -13,28 +13,29 @@ export default function useMotion(viewName) {
         return;
       }
 
-      if (!store.views[viewName]) {
-        console.warn(`${viewName} is not registered, maybe you have misspelled the MotionScene name?`);
+      if (!store.scenes[sceneName]) {
+        console.warn(`${sceneName} is not registered, maybe you have misspelled the MotionScene name?`);
         callback();
         return;
       }
 
-      const { sources } = store.views[viewName];
+      const { sources } = store.scenes[sceneName];
 
       dispatch({
         type: actions.view.setExitView,
-        viewName,
+        sceneName,
       });
 
       Object.keys(sources).forEach((animationKey) => {
         const { ref } = sources[animationKey];
         const rect = ref.getBoundingClientRect();
+
         // Prevent updating if the ref is not in the screen
         if (rect.width > 0 && rect.height > 0) {
           dispatch({
             type: actions.view.updateSourceRect,
             rect,
-            viewName,
+            sceneName,
             animationKey,
           });
         }

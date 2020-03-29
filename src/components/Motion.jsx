@@ -1,107 +1,53 @@
-import React from 'react';
+import React, { useRef, useEffect, useCallback, useState } from 'react';
+
+import keyframes from '../utils/keyframes';
 import { componentTypes } from '../utils/constants';
 
-export default class Motion extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.animation = null;
-    this.onAnimationCompleteTimer = null;
-  }
+/**
+ * Runs tween animation on MotionScene childrens
+ */
+export default function Motion({
+  animate, type, handleRef, tween, onAnimationComplete, ...props
+}) {
+  const animated = useRef(false);
+  const timerReference = useRef(null);
+  const [reference, setReference] = useState(null);
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.animate !== this.props.animate && this.props.animate) {
-      this.dispatchAnimation();
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.onAnimationCompleteTimer);
-  }
-
-  getAnimationProps = (props) => {
-    const { type } = this.props;
-    switch (type) {
-      case componentTypes.text:
-        return {
-          width: props.width,
-          height: props.height,
-          transform: props.transform,
-          ...(props.fontSize ? { fontSize: props.fontSize } : {}),
-          ...(props.color ? { color: props.color } : {}),
-        };
-      case componentTypes.image:
-        return props;
-      default:
-        return {};
-    }
-  }
-
-  endAnimationProps = () => {
-    const { endAnimation } = this.props;
-    return this.getAnimationProps(endAnimation);
-  }
-
-  initialAnimationProps = () => {
-    const { initialAnimation } = this.props;
-    return this.getAnimationProps(initialAnimation);
-  }
-
-  handleRef = (ref) => {
-    const { handleRef } = this.props;
-
-    this.ref = ref;
-
+  const attachRef = useCallback((ref) => {
     if (handleRef) {
       handleRef(ref);
     }
-  }
 
-  dispatchAnimation = () => {
-    const { onAnimationComplete } = this.props;
+    setReference(ref);
+  }, [handleRef]);
 
-    this.animation = this.ref.animate([
-      this.initialAnimationProps(),
-      this.endAnimationProps(),
-    ], {
-      easing: 'ease',
-      duration: 400,
-      fill: 'forwards',
-    });
+  useEffect(() => {
+    if (animate && !animated.current && reference) {
+      animated.current = true;
 
-    this.onAnimationCompleteTimer = setTimeout(() => {
-      if (onAnimationComplete) {
-        onAnimationComplete();
-      }
-    }, 400);
-  }
+      const { start, end } = keyframes(type, tween);
 
-  getAllowedProps = () => {
-    const {
-      handleRef, onAnimationComplete, transition, type, cssChange, animate,
-      endAnimation, initialAnimation, ...props
-    } = this.props;
-    return props;
-  }
+      timerReference.current = setTimeout(onAnimationComplete, 400);
 
-  render() {
-    const { type } = this.props;
-    const baseProps = this.getAllowedProps();
-    const props = {
-      ...baseProps,
-      ref: this.handleRef,
-    };
-
-    switch (type) {
-      case componentTypes.image:
-        return <img {...props} />;
-      case componentTypes.text:
-        return <div {...props} />;
-      default:
-        return null;
+      reference.animate([
+        start,
+        end,
+      ], {
+        easing: 'ease',
+        duration: 400,
+        fill: 'forwards',
+      });
     }
+  }, [animate, animated, tween, reference, onAnimationComplete, type]);
+
+  useEffect(() => clearTimeout(timerReference.current), []);
+
+  switch (type) {
+    case componentTypes.image:
+      return <img ref={attachRef} {...props} />;
+    case componentTypes.text:
+      return <div ref={attachRef} {...props} />;
+    default:
+      return null;
   }
 }
-
-Motion.defaultProps = {
-  animate: false,
-};

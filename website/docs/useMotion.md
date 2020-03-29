@@ -6,7 +6,7 @@ title: useMotion
 Returns a function that accepts a callback to exec after animation is started.
 
 ``` jsx
-useMotion(viewName: string)
+useMotion(sceneName: string)
 ```
 
 ### Example
