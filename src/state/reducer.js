@@ -86,7 +86,23 @@ export const reducer = (state, action) => {
         },
       });
     }
-    case actions.view.registerTarget:
+    case actions.view.registerTarget: {
+      if (!state.scenes[action.sceneName]) {
+        console.warn('Registering targets on not registered scene');
+        return update(state, {
+          scenes: {
+            [action.sceneName]: {
+              $set: {
+                ...initialView,
+                screenName: action.screenName,
+                sources: {
+                  [action.animationKey]: action.component,
+                },
+              },
+            },
+          },
+        });
+      }
       return update(state, {
         scenes: {
           [action.sceneName]: {
@@ -96,6 +112,7 @@ export const reducer = (state, action) => {
           },
         },
       });
+    }
     case actions.view.deleteTarget:
       return update(state, {
         scenes: {

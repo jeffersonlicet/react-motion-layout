@@ -9,12 +9,6 @@ import GlobalContext from '../../utils/globalContext';
 import { SceneContext } from '../MotionScene';
 import { ScreenContext } from '../MotionScreen';
 
-export function ContextProvider({ children }) {
-  const globalContext = useContext(GlobalContext);
-  const viewContext = useContext(SceneContext);
-  return children({ globalContext, viewContext });
-}
-
 /**
  * Computes styles and adds the element to te animation stack
  */

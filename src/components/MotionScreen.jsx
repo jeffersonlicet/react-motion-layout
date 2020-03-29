@@ -1,55 +1,30 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useRef, useContext, useEffect } from 'react';
 import GlobalContext from '../utils/globalContext';
+import randomString from '../utils/randomString';
 import actions from '../state/actions';
+import useFirstLayoutEffect from '../hooks/useFirstEffect';
 
 export const ScreenContext = React.createContext();
 
-function randomString() {
-  return Math.random().toString(36).substr(2, 5) + Math.random().toString(36).substr(2, 5);
-}
+/**
+ * Groups multiple scenes together and saves scroll state on navigation
+ */
+export default function MotionScreen({ children, name }) {
+  const nameRef = useRef(name || randomString());
+  const { dispatch } = useContext(GlobalContext) || {};
 
-export default class MotionScreen extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  useFirstLayoutEffect(() => {
+    dispatch({ type: actions.view.setScreen, screen: nameRef.current });
+  }, [dispatch]);
 
-    const { name } = props;
-
-    this.state = {
-      name: name || randomString(),
-    };
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.context;
-    const { name } = this.state;
-    dispatch({ type: actions.view.setScreen, screen: name });
-  }
-
-  componentWillUnmount() {
-    const { dispatch } = this.context;
+  useEffect(() => () => {
     const exitScroll = { x: window.scrollX, y: window.scrollY };
     dispatch({ type: actions.view.setExitScroll, exitScroll });
-  }
+  }, [dispatch]);
 
-  render() {
-    const { children } = this.props;
-    const { name } = this.state;
-    return (
-      <ScreenContext.Provider value={{ screenName: name }}>
-        {children}
-      </ScreenContext.Provider>
-    );
-  }
+  return (
+    <ScreenContext.Provider value={{ screenName: nameRef.current }}>
+      {children}
+    </ScreenContext.Provider>
+  );
 }
-
-MotionScreen.contextType = GlobalContext;
-
-MotionScreen.propTypes = {
-  name: PropTypes.string,
-  children: PropTypes.node.isRequired,
-};
-
-MotionScreen.defaultProps = {
-  name: null,
-};

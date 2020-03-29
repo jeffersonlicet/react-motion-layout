@@ -35,6 +35,9 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
     },
   }), [store]);
 
+  /**
+   * Clear all scenes, switch back to SourceMode and clear portal
+   */
   const cleanUp = useCallback(() => {
     Object.keys(store.scenes).forEach((view) => {
       if (store.scenes[view].screenName && store.scenes[view].screenName !== screenName) {
@@ -44,6 +47,7 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
         });
       }
     });
+
     setAnimated(true);
     ReactDOM.render(null, portal);
   }, [dispatch, portal, screenName, setAnimated, store.scenes]);
@@ -70,15 +74,15 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
       const points = getPoints(rect, targetRect);
 
       const style = {
-        marginTop: '0px !important',
-        marginLeft: '0px !important',
-        marginBottom: '0px !important',
-        marginRight: '0px !important',
-        position: 'absolute',
         top: 0,
         left: 0,
         bottom: 0,
+        position: 'absolute',
         pointerEvents: 'none',
+        marginTop: '0px !important',
+        marginLeft: '0px !important',
+        marginRight: '0px !important',
+        marginBottom: '0px !important',
       };
 
       target.ref.style.opacity = 0;
@@ -112,7 +116,7 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
       const finalProps = {
         ...props,
         key,
-        style: { ...source.component.props.style, ...props.style },
+        style: { ...source.component.props.style, ...props.style, ...props.tween.start },
       };
 
       return React.cloneElement(source.component, finalProps);
@@ -144,13 +148,19 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
   /**
    * Track if the component is mounted
    */
-  useLayoutEffect(() => {
+  useEffect(() => {
     mounted.current = true;
 
     return () => {
+      /**
+       * If the user does a fast navigation we should cancel the animation cleaning
+       * the scene and the portal
+       */
+      dispatch({ type: actions.view.remove, sceneName: name });
+      ReactDOM.render(null, portal);
       mounted.current = null;
     };
-  }, [portal]);
+  }, [dispatch, name, portal]);
 
   return React.createElement('div', { ref, onClick }, children);
 }
