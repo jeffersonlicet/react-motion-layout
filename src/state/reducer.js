@@ -64,6 +64,7 @@ export const reducer = (state, action) => {
         return update(state, {
           scenes: {
             [action.sceneName]: {
+              screenName: { $set: action.screenName },
               sources: {
                 [action.animationKey]: { $set: action.component },
               },
@@ -86,23 +87,7 @@ export const reducer = (state, action) => {
         },
       });
     }
-    case actions.view.registerTarget: {
-      if (!state.scenes[action.sceneName]) {
-        console.warn('Registering targets on not registered scene');
-        return update(state, {
-          scenes: {
-            [action.sceneName]: {
-              $set: {
-                ...initialView,
-                screenName: action.screenName,
-                sources: {
-                  [action.animationKey]: action.component,
-                },
-              },
-            },
-          },
-        });
-      }
+    case actions.view.registerTarget:
       return update(state, {
         scenes: {
           [action.sceneName]: {
@@ -112,7 +97,7 @@ export const reducer = (state, action) => {
           },
         },
       });
-    }
+
     case actions.view.deleteTarget:
       return update(state, {
         scenes: {
@@ -129,6 +114,13 @@ export const reducer = (state, action) => {
           },
         },
       });
+    case actions.view.clearScenes: {
+      const toRemove = Object.keys(state.scenes)
+        .filter((scene) => state.scenes[scene].screenName !== action.keep);
+      return update(state, {
+        scenes: { $unset: toRemove },
+      });
+    }
     default:
       throw new Error();
   }

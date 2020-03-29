@@ -20,6 +20,9 @@ export default function RouterLink({ to, replace, className, target, style, chil
 
       const method = replace ? history.replace : history.push;
 
+      /**
+       * Search for scenes and group by screen name
+       */
       const num = Object.keys(store.scenes)
         .reduce((acc, view) => {
           const { screenName } = store.scenes[view];
@@ -27,29 +30,14 @@ export default function RouterLink({ to, replace, className, target, style, chil
           return acc;
         }, {});
 
-      if (num[store.screen].length === 1) {
-        const activeView = num[store.screen][0];
-
+      if (num[store.screen] && num[store.screen].length === 1) {
         dispatch({
           type: actions.view.setExitView,
           sceneName: num[store.screen][0],
         });
-
-        const { sources } = store.scenes[activeView];
-
-        Object.keys(sources).forEach((animationKey) => {
-          const { ref } = sources[animationKey];
-
-          dispatch({
-            type: actions.view.updateSourceRect,
-            rect: ref.getBoundingClientRect(),
-            sceneName: activeView,
-            animationKey,
-          });
-        });
-
-        method(destination);
       }
+
+      method(destination);
     }
   }, [dispatch, history, location, replace, store.scenes, store.screen, to]);
 

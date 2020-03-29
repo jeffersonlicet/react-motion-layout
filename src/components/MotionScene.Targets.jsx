@@ -15,7 +15,7 @@ import GlobalContext from '../utils/globalContext';
 
 export default function RenderTarget({ name, children, onClick, setAnimated }) {
   const mounted = useRef(false);
-  const [animationsCounter, setCounter] = useState(0);
+  const animatedComponentsCount = useRef(0);
   const animated = useRef(false);
   const ref = useRef(null);
 
@@ -39,18 +39,47 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
    * Clear all scenes, switch back to SourceMode and clear portal
    */
   const cleanUp = useCallback(() => {
-    Object.keys(store.scenes).forEach((view) => {
-      if (store.scenes[view].screenName && store.scenes[view].screenName !== screenName) {
-        dispatch({
-          type: actions.view.remove,
-          sceneName: view,
-        });
-      }
+    console.log('cleaning up');
+
+    Object.keys(sources).forEach((animationKey) => {
+      dispatch({
+        type: actions.view.deleteTarget,
+        sceneName: name,
+        animationKey,
+      });
+
+      dispatch({
+        type: actions.view.deleteSource,
+        sceneName: name,
+        animationKey,
+      });
+
+      const target = targets[animationKey];
+      target.ref.style.opacity = 1;
+
+      dispatch({
+        type: actions.view.registerSource,
+        component: target,
+        sceneName: name,
+        animationKey,
+        screenName,
+      });
     });
 
-    setAnimated(true);
+    dispatch({ type: actions.view.clearScenes, keep: screenName });
     ReactDOM.render(null, portal);
-  }, [dispatch, portal, screenName, setAnimated, store.scenes]);
+  }, [dispatch, name, portal, screenName, sources, targets]);
+
+  /**
+   * If the animations are all done, we reset the animation stack
+   */
+  const onAnimationComplete = useCallback(() => {
+    animatedComponentsCount.current += 1;
+
+    if (animatedComponentsCount.current === Object.keys(sources).length && mounted) {
+      cleanUp();
+    }
+  }, [cleanUp, sources]);
 
   const tween = useCallback(() => {
     animated.current = true;
@@ -106,11 +135,7 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
           },
         },
         animate: true,
-        onAnimationComplete: () => {
-          if (mounted.current) {
-            setCounter(animationsCounter + 1);
-          }
-        },
+        onAnimationComplete,
       };
 
       const finalProps = {
@@ -123,16 +148,8 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
     });
 
     ReactDOM.render(AnimationComponents, portal);
-  }, [animationsCounter, getPoints, portal, sources, targets]);
+  }, [getPoints, portal, sources, targets, onAnimationComplete]);
 
-  /**
-   * If the animations are all done, we reset the animation stack
-   */
-  useEffect(() => {
-    if (animationsCounter === Object.keys(sources).length - 1) {
-      cleanUp();
-    }
-  }, [animationsCounter, sources, cleanUp]);
 
   /**
    * If all SharedElements are ready, dispatch the animation
@@ -152,12 +169,6 @@ export default function RenderTarget({ name, children, onClick, setAnimated }) {
     mounted.current = true;
 
     return () => {
-      /**
-       * If the user does a fast navigation we should cancel the animation cleaning
-       * the scene and the portal
-       */
-      dispatch({ type: actions.view.remove, sceneName: name });
-      ReactDOM.render(null, portal);
       mounted.current = null;
     };
   }, [dispatch, name, portal]);
