@@ -28,7 +28,7 @@ export default function HomeDemo() {
         { !animated
           && (
           <MotionScreen name="Feed-Screen">
-            <MotionScene name="story-0">
+            <MotionScene name="story-0" easing="cubic-bezier(0.22, 1, 0.36, 1)">
               <div className="flex flex-col cursor-default">
                 <div className="flex">
                   <SharedElement.Image
@@ -95,7 +95,7 @@ export default function HomeDemo() {
         { animated
         && (
           <MotionScreen name="Story-Screen">
-            <MotionScene name="story-0">
+            <MotionScene name="story-0" easing="cubic-bezier(0.22, 1, 0.36, 1)">
               <div className="flex">
                 <div className="flex flex-col items-center flex-shrink-0">
                   <SharedElement.Image
