@@ -1,111 +1,66 @@
-import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext, useMemo, useCallback, useRef } from 'react';
+
+import computeStyles from '../../utils/computeStyles';
 import { componentTypes } from '../../utils/constants';
 
 import actions from '../../state/actions';
+
 import GlobalContext from '../../utils/globalContext';
-import { ViewContext } from '../MotionScene';
+import { SceneContext } from '../MotionScene';
+import { ScreenContext } from '../MotionScreen';
 
-export function ContextProvider({ children }) {
-  const globalContext = useContext(GlobalContext);
-  const viewContext = useContext(ViewContext);
-  return children({ globalContext, viewContext });
-}
+/**
+ * Computes styles and adds the element to te animation stack
+ */
+export default function BaseElement({
+  animationKey, children, settings, type,
+}) {
+  const mounted = useRef(false);
+  const { sceneName } = useContext(SceneContext);
+  const { dispatch, store } = useContext(GlobalContext) || {};
+  const { screenName } = useContext(ScreenContext);
 
-export default class BaseElement extends React.Component {
-  handleRef = (ref) => {
-    const {
-      animationKey, children, viewContext, globalContext, type, settings,
-    } = this.props;
+  const isRegistered = useMemo(() => (
+    store && store.exitView === sceneName
+      && store.scenes[sceneName]
+      && store.scenes[sceneName].sources[animationKey]
+  ), [animationKey, sceneName, store]);
 
-    if (!animationKey) {
-      console.warn('No animation key provided for component', children, 'it will be skipped');
-      return;
-    }
+  const attachRef = useCallback((ref) => {
+    if (ref && !mounted.current) {
+      mounted.current = true;
 
-    const { viewName } = viewContext;
+      if (!animationKey) {
+        console.warn('No animation key provided for component', children, 'it will be skipped');
+        return;
+      }
 
-    if (!viewName) {
-      console.warn('Skipping SharedElement registration, MotionScene is invalid');
-      return;
-    }
+      if (!sceneName) {
+        console.warn('Skipping SharedElement registration, MotionScene is invalid');
+        return;
+      }
 
-    const { dispatch } = globalContext;
-
-    if (ref) {
+      const actionType = isRegistered ? actions.view.registerTarget : actions.view.registerSource;
       const { width, height, x, y } = ref.getBoundingClientRect();
-
-      let fontSize;
-      let color;
-
-      const computedStyle = window.getComputedStyle(ref, null);
-
-      if (settings.animateSize) {
-        fontSize = `${parseFloat(computedStyle.getPropertyValue('font-size'))}px`;
-      }
-
-      if (settings.animateColor) {
-        color = computedStyle.getPropertyValue('color');
-      }
-
-      const styles = {
-        fontSize,
-        color,
-      };
 
       const component = {
         ref,
         rect: { width, height, x, y },
-        styles: type === componentTypes.text ? styles : {},
+        styles: type === componentTypes.text ? computeStyles(ref, settings) : {},
         component: children,
         type,
         settings,
       };
 
-      const actionType = this.isComponentRegistered()
-        ? actions.view.registerTarget
-        : actions.view.registerSource;
-
       dispatch({
-        type: actionType, component, viewName, animationKey,
+        type: actionType,
+        animationKey,
+        component,
+        sceneName,
+        screenName,
       });
     }
-  }
+  }, [animationKey, sceneName, settings, isRegistered, type, children, dispatch, screenName]);
 
-  isComponentRegistered = () => {
-    const { globalContext, viewContext, animationKey } = this.props;
-    const { store } = globalContext;
-    const { viewName } = viewContext;
-    return (
-      store.exitView === viewName
-      && store.views[viewName]
-      && store.views[viewName].sources[animationKey]
-    );
-  }
-
-  render() {
-    const { children } = this.props;
-    return React.cloneElement(children, { ref: this.handleRef, ...children.props });
-  }
+  return React.cloneElement(children, { ...children.props, ref: attachRef });
 }
-
-BaseElement.propTypes = {
-  globalContext: PropTypes.shape({
-    store: PropTypes.any.isRequired,
-    dispatch: PropTypes.func.isRequired,
-  }).isRequired,
-  viewContext: PropTypes.shape({
-    viewName: PropTypes.string,
-  }),
-  type: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  animationKey: PropTypes.string,
-  settings: PropTypes.shape({}).isRequired,
-};
-
-BaseElement.defaultProps = {
-  animationKey: null,
-  viewContext: {
-    viewName: null,
-  },
-};

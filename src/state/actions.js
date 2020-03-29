@@ -11,6 +11,8 @@ const actions = {
     updateSourceRect: 'view/updateSourceRect',
     setScreen: 'view/setScreen',
     updateViewScreen: 'view/updateViewScreen',
+    setExitScroll: 'view/setExitScroll',
+    clearScenes: 'view/clearScenes',
   },
 };
 
