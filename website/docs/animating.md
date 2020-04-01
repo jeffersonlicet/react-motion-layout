@@ -129,3 +129,9 @@ export default function Story() {
 Now when you click on any item of the feed it should animate using the shared components we'd just defined.
 
 > Motion Layout will automatically detect the target and source properties to create a smooth animation.
+
+## See more examples:
+
+[Chat Example](https://codesandbox.io/s/chat-example-dyyy1)
+
+[Gallery Example](https://codesandbox.io/s/instagram-example-b6gkm)

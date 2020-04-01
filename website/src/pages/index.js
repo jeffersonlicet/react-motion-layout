@@ -65,8 +65,8 @@ function Feature({ title, description, icon }) {
 function Home() {
   return (
     <Layout
-      title="React.js hero animations"
-      description="Create beautiful immersive React.js hero animations."
+      title="React hero animations"
+      description="Create beautiful immersive React hero animations."
     >
       <MotionLayoutProvider>
         <header className="bg-gray-200 xl:min-h-screen">
