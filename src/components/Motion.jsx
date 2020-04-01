@@ -3,6 +3,8 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import keyframes from '../utils/keyframes';
 import { componentTypes } from '../utils/constants';
 
+const DEFAULT_EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
 /**
  * Runs tween animation on MotionScene childrens
  */
@@ -10,7 +12,6 @@ export default function Motion({
   animate, type, handleRef, tween, onAnimationComplete, easing, ...props
 }) {
   const animated = useRef(false);
-  const timerReference = useRef(null);
   const [reference, setReference] = useState(null);
 
   const attachRef = useCallback((ref) => {
@@ -27,19 +28,24 @@ export default function Motion({
 
       const { start, end } = keyframes(type, tween);
 
-      timerReference.current = setTimeout(onAnimationComplete, 400);
-      reference.animate([
+      const animation = reference.animate([
         start,
         end,
       ], {
-        easing: easing || 'ease',
+        easing: easing || DEFAULT_EASING,
         duration: 400,
         fill: 'forwards',
       });
+
+      animation.pause();
+
+      animation.onfinish = () => {
+        onAnimationComplete();
+      };
+
+      animation.play();
     }
   }, [animate, animated, tween, reference, onAnimationComplete, type, easing]);
-
-  useEffect(() => clearTimeout(timerReference.current), []);
 
   switch (type) {
     case componentTypes.image:
