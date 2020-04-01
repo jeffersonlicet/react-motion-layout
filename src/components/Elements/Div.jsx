@@ -4,18 +4,14 @@ import { componentTypes } from '../../utils/constants';
 import BaseElement from './BaseElement';
 import MotionImageForwardRef from '../MotionForward';
 
-export default function Image({ animationKey, ...props }) {
+export default function Div({ animationKey, ...props }) {
   return (
-    <BaseElement
-      animationKey={animationKey}
-      type={componentTypes.image}
-      settings={{}}
-    >
-      <MotionImageForwardRef type={componentTypes.image} {...props} />
+    <BaseElement animationKey={animationKey} type={componentTypes.div}>
+      <MotionImageForwardRef type={componentTypes.div} {...props} />
     </BaseElement>
   );
 }
 
-Image.propTypes = {
+Div.propTypes = {
   animationKey: PropTypes.string.isRequired,
 };

@@ -13,7 +13,7 @@ export default function Text({
       type={componentTypes.text}
       settings={{ animateColor, animateSize }}
     >
-      <MotionImageForwardRef type="text" {...props} />
+      <MotionImageForwardRef type={componentTypes.text} {...props} />
     </BaseElement>
   );
 }

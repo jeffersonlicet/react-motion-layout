@@ -113,6 +113,7 @@ export default function RenderTarget({ name, children, onClick, easing }) {
 
       target.ref.style.opacity = 0;
 
+      // TODO: define and spread those props using type.
       const props = {
         style,
         tween: {
@@ -122,6 +123,10 @@ export default function RenderTarget({ name, children, onClick, easing }) {
             transform: `translate3d(${points.source.x}px, ${points.source.y}px, 0)`,
             fontSize: styles.fontSize,
             color: styles.color,
+            backgroundColor: styles.backgroundColor,
+            background: styles.background,
+            boxShadow: styles.boxShadow,
+            borderRadius: styles.borderRadius,
           },
           end: {
             width: `${targetRect.width}px`,
@@ -129,6 +134,10 @@ export default function RenderTarget({ name, children, onClick, easing }) {
             transform: `translate3d(${points.dest.x}px, ${points.dest.y}px, 0)`,
             fontSize: target.styles.fontSize,
             color: target.styles.color,
+            background: target.styles.background,
+            backgroundColor: target.styles.backgroundColor,
+            boxShadow: target.styles.boxShadow,
+            borderRadius: target.styles.borderRadius,
           },
         },
         animate: true,

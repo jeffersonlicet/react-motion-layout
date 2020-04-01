@@ -1,7 +1,6 @@
 import React, { useContext, useMemo, useCallback, useRef } from 'react';
 
 import computeStyles from '../../utils/computeStyles';
-import { componentTypes } from '../../utils/constants';
 
 import actions from '../../state/actions';
 
@@ -46,7 +45,7 @@ export default function BaseElement({
       const component = {
         ref,
         rect: { width, height, x, y },
-        styles: type === componentTypes.text ? computeStyles(ref, settings) : {},
+        styles: computeStyles(type, ref, settings),
         component: children,
         type,
         settings,

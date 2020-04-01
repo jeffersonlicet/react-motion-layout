@@ -51,6 +51,7 @@ export default function Motion({
     case componentTypes.image:
       return <img ref={attachRef} {...props} />;
     case componentTypes.text:
+    case componentTypes.div:
       return <div ref={attachRef} {...props} />;
     default:
       return null;

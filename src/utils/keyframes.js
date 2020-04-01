@@ -1,21 +1,34 @@
 import { componentTypes } from './constants';
 
 function extractKeyframes(type, params) {
-  const { fontSize, color, width, height, transform } = params;
+  const {
+    fontSize, color, width, height, transform, backgroundColor, background, boxShadow, borderRadius,
+  } = params;
+
+  const common = {
+    width,
+    height,
+    transform,
+  };
+
   switch (type) {
     case componentTypes.text:
       return {
-        width,
-        height,
-        transform,
+        ...common,
         ...(fontSize ? { fontSize } : {}),
         ...(color ? { color } : {}),
       };
+    case componentTypes.div:
+      return {
+        ...common,
+        ...(background ? { background } : {}),
+        ...(backgroundColor ? { backgroundColor } : {}),
+        ...(boxShadow ? { boxShadow } : {}),
+        ...(borderRadius ? { borderRadius } : {}),
+      };
     case componentTypes.image:
       return {
-        width,
-        height,
-        transform,
+        ...common,
       };
     default:
       return {};
