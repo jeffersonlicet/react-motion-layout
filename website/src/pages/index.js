@@ -18,6 +18,7 @@ const makeExample = (uri) => `<iframe
 
 const exampleChat = makeExample('chat-example-dyyy1');
 const galleryExample = makeExample('instagram-example-b6gkm');
+const friendsExample = makeExample('friends-example-n7jpk');
 
 const features = [
   {
@@ -171,6 +172,31 @@ function Home() {
                 <div id="example-chat" dangerouslySetInnerHTML={{ __html: exampleChat }} />
               </div>
             </div>
+
+            <div className="flex flex-col lg:flex-row justify-between chat-bg p-8 pt-8">
+              <div className="w-full lg:w-1/2 shadow-xl rounded-md border-box-1">
+                <div id="example-chat" dangerouslySetInnerHTML={{ __html: friendsExample }} />
+              </div>
+
+              <div className="px-8 mt-8 lg:mt-0 flex flex-col text-white">
+                <h1 className="leading-tight">Friends</h1>
+                <div className="text-xl">
+                  This example shows you how MotionLayout animate
+                  <b> divs </b>
+                  using React Router.
+                </div>
+                <div className="leading-tight mt-8">Click on any item to navigate and dispatch the animation.</div>
+
+                <div className="mt-8">
+                  <ButtonWhite target="_blank" to="https://codesandbox.io/s/friends-example-n7jpk">
+                    View code on Sandbox
+                  </ButtonWhite>
+                </div>
+              </div>
+            </div>
+
+
+            
           </div>
         </main>
       </MotionLayoutProvider>

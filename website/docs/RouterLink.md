@@ -13,4 +13,4 @@ Renders a React-router-dom ``<Link>`` component that triggers animations. It req
 | Name          |      type     |   required |
 | ------------- | :-----------: | -----:   |
 | children      |   Node        | true |
-| to     |   string|function    |   true |
+| to     |   string or function | true    |

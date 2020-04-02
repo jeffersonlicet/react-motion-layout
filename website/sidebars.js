@@ -7,6 +7,7 @@ module.exports = {
       'MotionScene',
       'SharedElementText',
       'SharedElementImage',
+      'SharedElementDiv',
       'RouterLink',
     ],
     Hooks: ['useMotion'],
