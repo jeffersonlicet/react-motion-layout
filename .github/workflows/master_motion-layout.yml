@@ -22,6 +22,7 @@ jobs:
 
     - name: npm install, build, and test
       run: |
+        cd website
         npm install
         npm run build --if-present
         npm run test --if-present
@@ -32,4 +33,4 @@ jobs:
         app-name: 'motion-layout'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_14fabb491e39459f842584f7a4b8c3b5 }}
-        package: ./website
+        package: .
