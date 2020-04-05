@@ -32,4 +32,4 @@ jobs:
         app-name: 'motion-layout'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_14fabb491e39459f842584f7a4b8c3b5 }}
-        package: .
+        package: ./website
