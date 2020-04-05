@@ -1,22 +1,18 @@
 {
   "name": "react-motion-layout",
-  "version": "0.0.16",
+  "version": "0.1.0",
   "description": "Create beautiful immersive hero animations using shared components.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
   "scripts": {
     "dev": "rollup -c -w",
-    "build": "rollup -c",
-    "predeploy": "rollup -c && rm -rf package && mkdir package && cp -r dist package && cp package.json ./package"
+    "build": "rollup -c"
   },
   "author": "Jefferson Licet <jeffersonlicet@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "immutability-helper": "^3.0.1",
-    "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "web-animations-js": "2.3.2"
   },
@@ -26,6 +22,8 @@
     "react-router-dom": "^5.0.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-flow": "^7.8.3",
     "@babel/preset-react": "^7.8.3",
