@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="http://motion-layout.azurewebsites.net/img/logo.png" alt="drawing" width="100"/>
+  <img src="http://motion-layout.com/img/logo.png" alt="drawing" width="100"/>
 </p>
 
 <h2 align="center">Motion Layout</h2>
@@ -18,7 +18,7 @@
 ___
 
 ## Docs
-[React Motion Layout Docs](https://motion-layout.azurewebsites.net/)
+[React Motion Layout Docs](http://motion-layout.com)
 
 ## About
 

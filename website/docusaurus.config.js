@@ -1,9 +1,7 @@
-const path = require('path');
-
 module.exports = {
   title: 'React Motion Layout',
   tagline: 'Beautiful React hero animations.',
-  url: 'http://jeffersonlicet.com/reacto-motion-layout',
+  url: 'http://motion-layout.com/reacto-motion-layout',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
   organizationName: 'jeffersonlicet', // Usually your GitHub org/user name.
@@ -19,7 +17,7 @@ module.exports = {
     navbar: {
       title: 'Motion Layout',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'Motion Layout',
         src: 'img/logo.png',
       },
       links: [
