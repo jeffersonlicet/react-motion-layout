@@ -7,6 +7,11 @@ module.exports = {
   organizationName: 'jeffersonlicet', // Usually your GitHub org/user name.
   projectName: 'React Motion Layout', // Usually your repo name.
   themeConfig: {
+    announcementBar: {
+      id: 'supportus',
+      content:
+        '<span class="text-white">⭐️ If you like Motion Layout, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/jeffersonlicet/react-motion-layout">GitHub</a>! ⭐️</span>',
+    },
     googleAnalytics: {
       trackingID: 'UA-56940433-12',
     },

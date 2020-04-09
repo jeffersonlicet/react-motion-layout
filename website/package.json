@@ -9,15 +9,15 @@
     "deploy": "docusaurus deploy"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-alpha.48",
-    "@docusaurus/plugin-google-analytics": "^2.0.0-alpha.37",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.48",
-    "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.39",
+    "@docusaurus/core": "^2.0.0-alpha.50",
+    "@docusaurus/plugin-google-analytics": "^2.0.0-alpha.50",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.50",
+    "@docusaurus/theme-live-codeblock": "^2.0.0-alpha.50",
     "classnames": "^2.2.6",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "react-icons": "^3.9.0",
-    "react-motion-layout": "^0.1.0",
+    "react-motion-layout": "^0.1.1",
     "react-router-dom": "^5.1.2",
     "tailwindcss": "^1.2.0"
   },

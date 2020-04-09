@@ -1,6 +1,6 @@
 {
   "name": "react-motion-layout",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create beautiful immersive hero animations using shared components.",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
