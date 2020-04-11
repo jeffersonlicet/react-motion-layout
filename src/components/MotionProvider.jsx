@@ -46,11 +46,12 @@ export default function MotionProvider({ children, debug }) {
     log.info('Portal element created');
   }, [log]);
 
+  const contextValue = useMemo(() => ({
+    store, dispatch, portal, log,
+  }), [dispatch, log, portal, store]);
+
   return (
-    <GlobalContext.Provider value={{
-      store, dispatch, portal, log,
-    }}
-    >
+    <GlobalContext.Provider value={contextValue}>
       {children}
     </GlobalContext.Provider>
   );

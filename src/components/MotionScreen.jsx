@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from 'react';
+import React, { useRef, useContext, useEffect, useMemo } from 'react';
 import GlobalContext from '../utils/globalContext';
 import randomString from '../utils/randomString';
 import actions from '../state/actions';
@@ -22,8 +22,13 @@ export default function MotionScreen({ children, name }) {
     dispatch({ type: actions.view.setExitScroll, exitScroll });
   }, [dispatch]);
 
+
+  const contextValue = useMemo(() => ({
+    screenName: nameRef.current,
+  }), []);
+
   return (
-    <ScreenContext.Provider value={{ screenName: nameRef.current }}>
+    <ScreenContext.Provider value={contextValue}>
       {children}
     </ScreenContext.Provider>
   );

@@ -26,8 +26,13 @@ export function MotionScene(props) {
     [exitView, props.name],
   );
 
+  const contextValue = useMemo(() => ({
+    sceneName: props.name,
+    easing: props.easing,
+  }), [props.easing, props.name]);
+
   return (
-    <SceneContext.Provider value={{ sceneName: props.name, easing: props.easing }}>
+    <SceneContext.Provider value={contextValue}>
       { inTargetScene
         ? <MotionSceneTargets {...props} />
         : <MotionSceneSources {...props} />}
