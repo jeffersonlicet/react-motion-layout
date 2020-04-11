@@ -8,7 +8,7 @@ module.exports = {
   projectName: 'React Motion Layout', // Usually your repo name.
   themeConfig: {
     announcementBar: {
-      id: 'supportus',
+      id: 'supportus-new',
       content:
         '<span class="text-white">⭐️ If you like Motion Layout, give it a star on <a target="_blank" rel="noopener noreferrer" href="https://github.com/jeffersonlicet/react-motion-layout">GitHub</a>! ⭐️</span>',
     },
