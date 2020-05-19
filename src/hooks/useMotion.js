@@ -19,6 +19,11 @@ export default function useMotion(sceneName) {
         return;
       }
 
+      if (!store.onExit) {
+        callback();
+        return;
+      }
+
       const { sources } = store.scenes[sceneName];
 
       dispatch({

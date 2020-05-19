@@ -15,7 +15,7 @@ export default function RouterLink({ to, replace, className, target, style, chil
 
   const onClick = useCallback((e) => {
     const destination = typeof to === 'function' ? to(location) : to;
-    if (store.screen) {
+    if (store.screen && store.onExit) {
       e.preventDefault();
 
       const method = replace ? history.replace : history.push;
@@ -39,7 +39,7 @@ export default function RouterLink({ to, replace, className, target, style, chil
 
       method(destination);
     }
-  }, [dispatch, history, location, replace, store.scenes, store.screen, to]);
+  }, [dispatch, history, location, replace, store.onExit, store.scenes, store.screen, to]);
 
   return (
     <Link

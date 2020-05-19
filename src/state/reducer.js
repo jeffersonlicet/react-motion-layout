@@ -5,6 +5,8 @@ export const initialState = {
   exitView: null,
   scenes: {},
   screen: null,
+  onEnter: true,
+  onExit: true,
   exitScroll: null,
 };
 
@@ -35,6 +37,8 @@ export const reducer = (state, action) => {
     case actions.view.setScreen:
       return update(state, {
         screen: { $set: action.screen },
+        onEnter: { $set: action.onEnter },
+        onExit: { $set: action.onExit },
       });
     case actions.view.setExitScroll:
       return update(state, {

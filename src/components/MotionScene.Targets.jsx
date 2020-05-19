@@ -18,7 +18,7 @@ export default function RenderTarget({ name, children, onClick, easing }) {
   const animated = useRef(false);
   const ref = useRef(null);
 
-  const { screenName } = useContext(ScreenContext);
+  const { screenName, onExit, onEnter } = useContext(ScreenContext);
   const { store, dispatch, portal } = useContext(GlobalContext);
 
   const { sources, targets } = store.scenes[name];
@@ -63,9 +63,14 @@ export default function RenderTarget({ name, children, onClick, easing }) {
       });
     });
 
-    dispatch({ type: actions.view.clearScenes, keep: screenName });
+    if (onExit) {
+      dispatch({ type: actions.view.clearScenes, keep: screenName });
+    } else {
+      dispatch({ type: actions.view.setExitView, exitView: null });
+    }
+
     ReactDOM.render(null, portal);
-  }, [dispatch, name, portal, screenName, sources, targets]);
+  }, [dispatch, name, portal, screenName, sources, targets, onExit]);
 
   /**
    * If the animations are all done, we reset the animation stack
@@ -79,6 +84,11 @@ export default function RenderTarget({ name, children, onClick, easing }) {
   }, [cleanUp, sources]);
 
   const tween = useCallback(() => {
+    if (!onEnter) {
+      cleanUp();
+      return;
+    }
+
     animated.current = true;
 
     ref.current.animate([
