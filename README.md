@@ -5,6 +5,7 @@
 <h2 align="center">Motion Layout</h2>
 
 <p align="center">
+  <a href="http://hits.dwyl.com/jeffersonlicet/react-motion-layout"><img src="http://hits.dwyl.com/jeffersonlicet/react-motion-layout.svg"></a>
   <a href="https://www.npmjs.com/package/react-motion-layout"><img src="https://img.shields.io/npm/v/react-motion-layout?style=flat-square"></a>
   <a href="https://bundlephobia.com/result?p=react-motion-layout@0.1.1"><img src="https://img.shields.io/bundlephobia/min/react-motion-layout?style=flat-square"></a>
   <a href="http://motion-layout.com"><img src="https://github.com/jeffersonlicet/react-motion-layout/workflows/Website%20Deploy/badge.svg"></a>
