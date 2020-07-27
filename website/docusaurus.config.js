@@ -7,6 +7,10 @@ module.exports = {
   organizationName: 'jeffersonlicet', // Usually your GitHub org/user name.
   projectName: 'React Motion Layout', // Usually your repo name.
   themeConfig: {
+    algolia: {
+      apiKey: '60e4ce389d11f9291daed91bfbb0b51a',
+      indexName: 'azurewebsites_motion-layout',
+    },
     announcementBar: {
       id: 'supportus-new',
       content:
