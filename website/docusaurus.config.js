@@ -7,6 +7,9 @@ module.exports = {
   organizationName: 'jeffersonlicet', // Usually your GitHub org/user name.
   projectName: 'React Motion Layout', // Usually your repo name.
   themeConfig: {
+    colorMode: {
+      disableSwitch: true,
+    },
     algolia: {
       apiKey: '60e4ce389d11f9291daed91bfbb0b51a',
       indexName: 'azurewebsites_motion-layout',
@@ -22,7 +25,6 @@ module.exports = {
     prism: {
       theme: require('prism-react-renderer/themes/dracula'),
     },
-    disableDarkMode: true,
     navbar: {
       title: 'Motion Layout',
       logo: {
