@@ -13,13 +13,13 @@ useMotion(sceneName: string)
 ```jsx {8,12-17}
 // item.jsx
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SharedElement, MotionScene, useMotion } from 'react-motion-layout';
 
 export default function Item({ data }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const withTransition = useMotion(`story-${data.id}`);
-  const callback = useCallback(() => history.push(`/story/${data.id}`));
+  const callback = useCallback(() => navigate(`/story/${data.id}`));
 
   return (
     <MotionScene name={`story-${id}`} onClick={withTransition(callback)}>
