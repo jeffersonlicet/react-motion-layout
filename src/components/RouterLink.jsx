@@ -1,5 +1,5 @@
 import React, { useContext, useCallback } from 'react';
-import { useHistory, useLocation, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 
 import GlobalContext from '../utils/globalContext';
 import actions from '../state/actions';
@@ -10,7 +10,7 @@ import actions from '../state/actions';
  */
 export default function RouterLink({ to, replace, className, target, style, children }) {
   const { store, dispatch } = useContext(GlobalContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const onClick = useCallback((e) => {
@@ -18,7 +18,7 @@ export default function RouterLink({ to, replace, className, target, style, chil
     if (store.screen && store.onExit) {
       e.preventDefault();
 
-      const method = replace ? history.replace : history.push;
+      const method = replace ? (path) => navigate(path, { replace: true }) : navigate;
 
       /**
        * Search for scenes and group by screen name

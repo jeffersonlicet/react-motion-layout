@@ -14,11 +14,11 @@
     "@docusaurus/preset-classic": "2.0.0-alpha.50",
     "@docusaurus/theme-live-codeblock": "2.0.0-alpha.50",
     "classnames": "^2.2.6",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-icons": "^3.9.0",
     "react-motion-layout": "^0.1.1",
-    "react-router-dom": "^5.1.2",
+    "react-router-dom": "^6.14.0",
     "tailwindcss": "^1.2.0"
   },
   "browserslist": {

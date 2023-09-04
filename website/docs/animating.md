@@ -7,7 +7,9 @@ Let's build together an example of how to use Motion Layout.
 We are going to build a simple feed and a story view using react router.
 
 ### 1 Use the Motion Layout Provider
+
 Motion Layout Provider is responsible for providing the state management.
+
 ```jsx {6,15}
 // app.js
 ...
@@ -29,6 +31,7 @@ ReactDOM.render(
 ```
 
 ### 2 Create some placeholder stories
+
 ```jsx
 // stories.js
 export const items = [
@@ -46,8 +49,10 @@ export const items = [
 ```
 
 ### 3 Create the Feed View
+
 Since this is an individual screen, we wrap it using MotionScreen to clean registered elements when
 abandoning this screen.
+
 ```jsx
 // feed.jsx
 ...
@@ -65,11 +70,14 @@ export default function Feed() {
 ```
 
 ### 4 Create the Item View
+
 Each item will be wrapped with a **MotionScene**.
 A **MotionScene** is a component that contains **SharedElements**.
 
-**SharedElements** are the components that we will animate. They must have an unique key called *animationKey*, we use that key to find a matching SharedElement when changing the views.
-___
+**SharedElements** are the components that we will animate. They must have an unique key called _animationKey_, we use that key to find a matching SharedElement when changing the views.
+
+---
+
 **MotionScene** accepts an onClick property, in this case we are using the **withTransition** hook, that will trigger the animation
 and then will change the route using the history hook provided by react-router-dom.
 
@@ -78,26 +86,25 @@ and then will change the route using the history hook provided by react-router-d
 ```jsx {8,12-17}
 // item.jsx
 import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { SharedElement, MotionScene, useMotion } from 'react-motion-layout';
 
 export default function Item({ data }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const withTransition = useMotion(`story-${data.id}`);
-  const callback = useCallback(() => history.push(`/story/${id}`));
+  const callback = useCallback(() => navigate(`/story/${id}`));
 
   return (
     <MotionScene name={`story-${id}`} onClick={withTransition(callback)}>
       <SharedElement.Image animationKey="big-image" src={data.image} />
-      <SharedElement.Text animationKey="text-main">
-        {data.text}
-      </SharedElement.Text>
+      <SharedElement.Text animationKey="text-main">{data.text}</SharedElement.Text>
     </MotionScene>
   );
 }
 ```
 
 ### 5 Create the Story View
+
 The Story View is wrapped by a MotionScene as well, when navigating, those scenes will match and the declared SharedComponents will perform the animation.
 
 ```jsx {0}
@@ -115,9 +122,7 @@ export default function Story() {
   return (
     <MotionScreen>
       <MotionScene name={`story-${storyId}`} scrollUpOnEnter>
-        <SharedElement.Text animationKey="text-main">
-          {text}
-        </SharedElement.Text>
+        <SharedElement.Text animationKey="text-main">{text}</SharedElement.Text>
         <SharedElement.Image animationKey="big-image" src={image} />
       </MotionScene>
     </MotionScreen>
@@ -126,6 +131,7 @@ export default function Story() {
 ```
 
 ## And that's it
+
 Now when you click on any item of the feed it should animate using the shared components we'd just defined.
 
 > Motion Layout will automatically detect the target and source properties to create a smooth animation.
